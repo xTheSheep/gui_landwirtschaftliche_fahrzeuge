@@ -194,6 +194,37 @@ QLineEdit {
         </property>
        </widget>
       </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="account_hint">
+        <property name="minimumSize">
+         <size>
+          <width>400</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>400</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Bahnschrift Light</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: green;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -219,7 +250,7 @@ QLineEdit {
         </property>
         <property name="maximumSize">
          <size>
-          <width>140</width>
+          <width>79</width>
           <height>16777215</height>
          </size>
         </property>
@@ -246,7 +277,7 @@ QLineEdit {
         </property>
         <property name="maximumSize">
          <size>
-          <width>160</width>
+          <width>79</width>
           <height>16777215</height>
          </size>
         </property>
@@ -271,5 +302,22 @@ QLineEdit {
  <resources>
   <include location="agriculture-shop-ressources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>NewAccountDialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>560</x>
+     <y>506</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>775</x>
+     <y>551</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

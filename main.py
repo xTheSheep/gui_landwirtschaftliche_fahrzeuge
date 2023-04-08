@@ -10,8 +10,14 @@ class Startscreen(QMainWindow):
     def __init__(self):
         super(Startscreen, self).__init__()
         loadUi("interface.ui", self)
+        self.stackedWidget.setCurrentIndex(0)
         self.pushButton_4.clicked.connect(self.login)
         self.pushButton.clicked.connect(self.register)
+        self.home_button.clicked.connect(lambda: self.updatepage(0))
+        self.search_button.clicked.connect(lambda: self.updatepage(1))
+
+    def updatepage(self, number):
+        self.stackedWidget_mainapp.setCurrentIndex(number)
 
     def login(self):
         if checklogin(self.input_username.text(), self.input_password.text()):
@@ -42,14 +48,13 @@ class CreateAccountDialog(QDialog):
             'password': self.input_password.text(),
             'budget': self.input_budget.text(),
         })
-
+        self.account_hint.setText('Account has been created!')
 
 # login data
 def checklogin(username, password):
     for user in users:
         if username == user['username'] and password == user['password']:
             return True
-
 
 users = [
     {'username': 'Oskar', 'password': '123', 'budget': 187},
