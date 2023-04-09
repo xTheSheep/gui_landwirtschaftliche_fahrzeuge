@@ -32,7 +32,9 @@ class Startscreen(QMainWindow):
             query = 'SELECT password, seller FROM users WHERE username =\'' + user + "\'"
             cursor.execute(query)
             result = cursor.fetchone()
-            if result[0] == password and result[1] == 0:
+            if result is None:
+                self.hint_login_information.setText('Invalid Data')
+            elif result[0] == password and result[1] == 0:
                 # set user information
                 self.welcome_label.setText(f'welcome back {user}'.upper())
                 self.stackedWidget.setCurrentIndex(1)  # switch to buyerpage
