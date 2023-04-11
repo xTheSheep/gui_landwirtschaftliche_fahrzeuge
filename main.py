@@ -2,8 +2,9 @@ import sys
 import sqlite3
 from ui_files import ressources_interface
 from PyQt5.uic import loadUi
-from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow
-from PyQt5.QtGui import QDoubleValidator, QValidator
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget
+from PyQt5.QtGui import QDoubleValidator
+from PyQt5 import QtSql
 
 
 # screens
@@ -11,14 +12,37 @@ class Startscreen(QMainWindow):
     def __init__(self):
         super(Startscreen, self).__init__()
         loadUi("./ui_files/interface.ui", self)
+        # set session data
+        self.user = ''
+        self.budget = 0
+        # set initial session values
         self.stackedWidget.setCurrentIndex(0)
         self.pushButton_4.clicked.connect(self.login)
         self.pushButton.clicked.connect(self.register)
-        self.home_button.clicked.connect(lambda: self.updatepage(0))
-        self.search_button.clicked.connect(lambda: self.updatepage(1))
+        self.searchitem_button.clicked.connect(self.refreshtable)
+        # setup buttons sidebar buyer
+        self.home_button.clicked.connect(lambda: self.updatepage_buyer(0))
+        self.search_button.clicked.connect(lambda: self.updatepage_buyer(1))
+        self.logout_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
+        # setup buttons sidebar seller
+        self.home_button_seller.clicked.connect(lambda: self.updatepage_seller(0))
+        self.search_button_seller.clicked.connect(lambda: self.updatepage_seller(1))
+        self.logout_button_seller.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
 
-    def updatepage(self, number):
+        for n in range(10):
+            self.search_layout.addWidget(ItemView('test', 120000))
+
+    def refreshtable(self):
+        model = QtSql.QSqlRelationalTableModel()
+        model.setTable("bestand")
+        model.select()
+        self.table_search_items.setModel(model)
+
+    def updatepage_buyer(self, number):
         self.stackedWidget_mainapp.setCurrentIndex(number)
+
+    def updatepage_seller(self, number):
+        self.stackedWidget_mainapp_seller.setCurrentIndex(number)
 
     def login(self):
         user = self.input_username.text()
@@ -29,20 +53,28 @@ class Startscreen(QMainWindow):
         else:
             db = sqlite3.connect("db.db")
             cursor = db.cursor()
-            query = 'SELECT password, seller FROM users WHERE username =\'' + user + "\'"
+            query = 'SELECT password, budget, seller FROM users WHERE username =\'' + user + "\'"
             cursor.execute(query)
             result = cursor.fetchone()
             if result is None:
                 self.hint_login_information.setText('Invalid Data')
-            elif result[0] == password and result[1] == 0:
-                # set user information
+            elif result[0] == password and result[2] == 0:  # login as buyer
+                self.user = user
+                self.budget = result[1]
                 self.welcome_label.setText(f'welcome back {user}'.upper())
+                self.startpage_budget_label.setText(f'Budget {int(self.budget)} €')
+                self.searchpage_budget_label.setText(f'Budget {int(self.budget)} €')
                 self.stackedWidget.setCurrentIndex(1)  # switch to buyerpage
                 self.hint_login_information.setText('')
-            elif result[0] == password and result[1] == 1:
+                self.input_password.setText('')
+                self.updatepage_buyer(0)
+            elif result[0] == password and result[2] == 1:  # login as seller
+                self.user = user
+                self.budget = result[1]
                 self.welcome_label.setText(f'welcome back {user}'.upper())
                 self.stackedWidget.setCurrentIndex(2)  # switch to sellerpage
-                self.hint_login_information.setText('')
+                self.input_password.setText('')
+                self.updatepage_seller(0)
             else:
                 self.hint_login_information.setText('Invalid Data')
 
@@ -55,7 +87,7 @@ class CreateAccountDialog(QDialog):
         super(CreateAccountDialog, self).__init__()
         loadUi("./ui_files/newaccountdialog.ui", self)
         self.input_budget.editingFinished.connect(self.validate)
-        self.createAccount_button.clicked.connect(self.createAccount)
+        self.createAccount_button.clicked.connect(self.createaccount)
 
     def validate(self):
         rule = QDoubleValidator(1, 10000000000, 0)
@@ -64,7 +96,7 @@ class CreateAccountDialog(QDialog):
         else:
             self.input_budget.setText('')
 
-    def createAccount(self):
+    def createaccount(self):
         username = self.input_username.text()
         password = self.input_password.text()
         budget = self.input_budget.text()
@@ -92,6 +124,19 @@ class CreateAccountDialog(QDialog):
             else:
                 self.account_hint.setText('Username already exists')
 
+
+class ItemView(QWidget):
+    def __init__(self, name='preis', preis='preis', marke='marke'):
+        super(ItemView, self).__init__()
+        loadUi("./ui_files/stockitem.ui", self)
+        # self.setFixedHeight(150)
+        self.name.setText(str(name))
+        self.marke.setText(str(marke))
+        self.preis.setText(str(preis) + '€')
+
+
+database = QtSql.QSqlDatabase.addDatabase('QSQLITE')
+database.setDatabaseName("db.db")
 
 # main
 app = QApplication(sys.argv)

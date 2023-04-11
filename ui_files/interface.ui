@@ -21,7 +21,7 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_21">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
     <property name="leftMargin">
      <number>0</number>
     </property>
@@ -527,7 +527,7 @@ QPushButton {
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_4">
               <item>
-               <widget class="QPushButton" name="settings_button">
+               <widget class="QPushButton" name="logout_button">
                 <property name="minimumSize">
                  <size>
                   <width>40</width>
@@ -548,7 +548,7 @@ QPushButton {
                 </property>
                 <property name="icon">
                  <iconset resource="agriculture-shop-ressources.qrc">
-                  <normaloff>:/icons/assets/icons/settings_FILL0_wght400_GRAD0_opsz48.svg</normaloff>:/icons/assets/icons/settings_FILL0_wght400_GRAD0_opsz48.svg</iconset>
+                  <normaloff>:/icons/assets/icons/logout_FILL0_wght400_GRAD0_opsz48.svg</normaloff>:/icons/assets/icons/logout_FILL0_wght400_GRAD0_opsz48.svg</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -601,6 +601,22 @@ QPushButton:focus {
 </string>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_6">
+               <item>
+                <widget class="QLabel" name="startpage_budget_label">
+                 <property name="font">
+                  <font>
+                   <family>Bahnschrift</family>
+                   <pointsize>14</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Budget: XXXX</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
                <item alignment="Qt::AlignHCenter">
                 <widget class="QLabel" name="label">
                  <property name="minimumSize">
@@ -741,10 +757,26 @@ QLineEdit {
   height: 20px;
 }</string>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,0,0">
+              <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,0,0,0">
                <property name="sizeConstraint">
                 <enum>QLayout::SetDefaultConstraint</enum>
                </property>
+               <item>
+                <widget class="QLabel" name="searchpage_budget_label">
+                 <property name="font">
+                  <font>
+                   <family>Bahnschrift</family>
+                   <pointsize>14</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Budget: XXXX</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
                <item>
                 <widget class="QLabel" name="header_search">
                  <property name="font">
@@ -788,6 +820,16 @@ QLineEdit {
                   <property name="verticalSpacing">
                    <number>10</number>
                   </property>
+                  <item row="2" column="1">
+                   <widget class="QLineEdit" name="lineEdit_4">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="placeholderText">
+                     <string>Max €</string>
+                    </property>
+                   </widget>
+                  </item>
                   <item row="2" column="0">
                    <widget class="QLineEdit" name="lineEdit_2">
                     <property name="text">
@@ -818,16 +860,6 @@ QLineEdit {
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="1">
-                   <widget class="QLineEdit" name="lineEdit_4">
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>Max €</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="1" column="1">
                    <widget class="QLineEdit" name="lineEdit_3">
                     <property name="text">
@@ -842,7 +874,7 @@ QLineEdit {
                 </widget>
                </item>
                <item alignment="Qt::AlignHCenter">
-                <widget class="QPushButton" name="pushButton_3">
+                <widget class="QPushButton" name="searchitem_button">
                  <property name="minimumSize">
                   <size>
                    <width>140</width>
@@ -851,7 +883,7 @@ QLineEdit {
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>120</width>
+                   <width>79</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -870,17 +902,7 @@ QLineEdit {
                 </widget>
                </item>
                <item>
-                <spacer name="verticalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
+                <widget class="QTableView" name="table_search_items"/>
                </item>
               </layout>
              </widget>
@@ -893,6 +915,21 @@ QLineEdit {
       </widget>
       <widget class="QWidget" name="seller">
        <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
          <widget class="QFrame" name="sidebar_seller">
           <property name="maximumSize">
@@ -905,7 +942,7 @@ QLineEdit {
            <bool>false</bool>
           </property>
           <property name="styleSheet">
-           <string notr="true">#sidebar {
+           <string notr="true">#sidebar_seller {
 	background-color: rgb(223, 223, 223);
 }
 
@@ -1065,7 +1102,7 @@ QPushButton {
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_18">
               <item>
-               <widget class="QPushButton" name="settings_button_seller">
+               <widget class="QPushButton" name="logout_button_seller">
                 <property name="minimumSize">
                  <size>
                   <width>40</width>
@@ -1086,7 +1123,7 @@ QPushButton {
                 </property>
                 <property name="icon">
                  <iconset resource="agriculture-shop-ressources.qrc">
-                  <normaloff>:/icons/assets/icons/settings_FILL0_wght400_GRAD0_opsz48.svg</normaloff>:/icons/assets/icons/settings_FILL0_wght400_GRAD0_opsz48.svg</iconset>
+                  <normaloff>:/icons/assets/icons/logout_FILL0_wght400_GRAD0_opsz48.svg</normaloff>:/icons/assets/icons/logout_FILL0_wght400_GRAD0_opsz48.svg</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -1114,8 +1151,8 @@ QPushButton {
            <bool>false</bool>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
-           <item alignment="Qt::AlignTop">
-            <widget class="QStackedWidget" name="stackedWidget_mainapp_3">
+           <item>
+            <widget class="QStackedWidget" name="stackedWidget_mainapp_seller">
              <property name="currentIndex">
               <number>0</number>
              </property>
@@ -1188,10 +1225,13 @@ QPushButton:focus {
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
                  </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
                  <property name="sizeHint" stdset="0">
                   <size>
                    <width>20</width>
-                   <height>40</height>
+                   <height>20</height>
                   </size>
                  </property>
                 </spacer>
@@ -1212,7 +1252,7 @@ QPushButton:focus {
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>79</width>
+                   <width>150</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -1232,11 +1272,24 @@ QPushButton:focus {
                  </property>
                 </widget>
                </item>
+               <item>
+                <spacer name="verticalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
               </layout>
              </widget>
              <widget class="QWidget" name="page_search_seller">
               <property name="styleSheet">
-               <string notr="true">.QPushButton {
+               <string notr="true">#searchitem_button_seller {
   background-color: #222;
   border-radius: 4px;
   border-style: none;
@@ -1245,9 +1298,8 @@ QPushButton:focus {
   max-width: none;
   padding: 9px 20px 8px;
 }
-
-QPushButton:hover,
-QPushButton:focus {
+#searchitem_button_seller:hover,
+#searchitem_button_seller:focus {
   background-color: rgb(54, 54, 54);
 }
 
@@ -1269,6 +1321,12 @@ QLineEdit {
                </property>
                <item>
                 <widget class="QLabel" name="header_search_3">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>50</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
                    <family>Bahnschrift</family>
@@ -1320,26 +1378,6 @@ QLineEdit {
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="2">
-                   <widget class="QLineEdit" name="lineEdit_12">
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>Year</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLineEdit" name="lineEdit_13">
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>PS</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="2" column="1">
                    <widget class="QLineEdit" name="lineEdit_14">
                     <property name="text">
@@ -1360,11 +1398,31 @@ QLineEdit {
                     </property>
                    </widget>
                   </item>
+                  <item row="1" column="2">
+                   <widget class="QLineEdit" name="lineEdit_12">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="placeholderText">
+                     <string>Year</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLineEdit" name="lineEdit_13">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="placeholderText">
+                     <string>PS</string>
+                    </property>
+                   </widget>
+                  </item>
                  </layout>
                 </widget>
                </item>
                <item alignment="Qt::AlignHCenter">
-                <widget class="QPushButton" name="pushButton_10">
+                <widget class="QPushButton" name="searchitem_button_seller">
                  <property name="minimumSize">
                   <size>
                    <width>140</width>
@@ -1392,17 +1450,63 @@ QLineEdit {
                 </widget>
                </item>
                <item>
-                <spacer name="verticalSpacer_10">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                <widget class="QFrame" name="frame_3">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
                  </property>
-                </spacer>
+                 <layout class="QVBoxLayout" name="verticalLayout_9">
+                  <item>
+                   <widget class="QScrollArea" name="scrollArea">
+                    <property name="frameShape">
+                     <enum>QFrame::NoFrame</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Sunken</enum>
+                    </property>
+                    <property name="lineWidth">
+                     <number>2</number>
+                    </property>
+                    <property name="widgetResizable">
+                     <bool>true</bool>
+                    </property>
+                    <widget class="QWidget" name="scrollAreaWidgetContents">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>1082</width>
+                       <height>529</height>
+                      </rect>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_2">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <layout class="QVBoxLayout" name="search_layout">
+                        <property name="spacing">
+                         <number>3</number>
+                        </property>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -1425,7 +1529,7 @@ QLineEdit {
   <tabstop>input_username</tabstop>
   <tabstop>home_button</tabstop>
   <tabstop>search_button</tabstop>
-  <tabstop>settings_button</tabstop>
+  <tabstop>logout_button</tabstop>
   <tabstop>cart_button</tabstop>
  </tabstops>
  <resources>
@@ -1439,12 +1543,28 @@ QLineEdit {
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>595</x>
-     <y>510</y>
+     <x>705</x>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>36</x>
      <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_9</sender>
+   <signal>clicked()</signal>
+   <receiver>search_button_seller</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>673</x>
+     <y>474</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>34</x>
+     <y>93</y>
     </hint>
    </hints>
   </connection>
