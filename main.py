@@ -32,11 +32,26 @@ class Startscreen(QMainWindow):
         for n in range(10):
             self.search_layout.addWidget(ItemView('test', 120000))
 
+        for n in range(10):
+            self.layout_search_buyer.addWidget(ItemView('test', 120000))
+
     def refreshtable(self):
-        model = QtSql.QSqlRelationalTableModel()
-        model.setTable("bestand")
-        model.select()
-        self.table_search_items.setModel(model)
+
+        self.clearlayout()
+
+        db = sqlite3.connect("db.db")
+        cursor = db.cursor()
+        query = 'SELECT * FROM bestand'
+        cursor.execute(query)
+        result = cursor.fetchall()
+
+        for product in result:
+            self.layout_search_buyer.addWidget(ItemView(product[0], product[1], product[2],
+                                                        product[3], product[4], product[5]))
+
+    def clearlayout(self):
+        for i in reversed(range(self.layout_search_buyer.count())):
+            self.layout_search_buyer.itemAt(i).widget().deleteLater()
 
     def updatepage_buyer(self, number):
         self.stackedWidget_mainapp.setCurrentIndex(number)
@@ -126,12 +141,13 @@ class CreateAccountDialog(QDialog):
 
 
 class ItemView(QWidget):
-    def __init__(self, name='preis', preis='preis', marke='marke'):
+    def __init__(self, hersteller='hersteller', typ='typ', ps='ps', kmh='kmh', preis='preis', baujahr='baujahr'):
         super(ItemView, self).__init__()
         loadUi("./ui_files/stockitem.ui", self)
-        # self.setFixedHeight(150)
-        self.name.setText(str(name))
-        self.marke.setText(str(marke))
+        self.typ.setText(str(typ))
+        self.hersteller.setText(str(hersteller))
+        self.ps.setText(str(ps) + 'PS')
+        self.kmh.setText(str(kmh) + 'km/h')
         self.preis.setText(str(preis) + '€')
 
 

@@ -21,7 +21,7 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <layout class="QVBoxLayout" name="verticalLayout_10">
     <property name="leftMargin">
      <number>0</number>
     </property>
@@ -40,7 +40,7 @@
        <cursorShape>ArrowCursor</cursorShape>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="login_page">
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -576,10 +576,10 @@ QPushButton {
            <bool>false</bool>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout">
-           <item alignment="Qt::AlignTop">
+           <item>
             <widget class="QStackedWidget" name="stackedWidget_mainapp">
              <property name="currentIndex">
-              <number>0</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="page_home">
               <property name="styleSheet">
@@ -682,10 +682,13 @@ QPushButton:focus {
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
                  </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
                  <property name="sizeHint" stdset="0">
                   <size>
                    <width>20</width>
-                   <height>30</height>
+                   <height>15</height>
                   </size>
                  </property>
                 </spacer>
@@ -726,6 +729,19 @@ QPushButton:focus {
                  </property>
                 </widget>
                </item>
+               <item>
+                <spacer name="verticalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
               </layout>
              </widget>
              <widget class="QWidget" name="page_search">
@@ -736,7 +752,6 @@ QPushButton:focus {
   border-style: none;
   color: #fff;
   line-height: 1.5;
-  max-width: none;
   padding: 9px 20px 8px;
 }
 
@@ -883,7 +898,7 @@ QLineEdit {
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>79</width>
+                   <width>16777215</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -902,7 +917,47 @@ QLineEdit {
                 </widget>
                </item>
                <item>
-                <widget class="QTableView" name="table_search_items"/>
+                <widget class="QFrame" name="frame_4">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_11">
+                  <item>
+                   <widget class="QScrollArea" name="scrollArea_buyer">
+                    <property name="widgetResizable">
+                     <bool>true</bool>
+                    </property>
+                    <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>1080</width>
+                       <height>498</height>
+                      </rect>
+                     </property>
+                     <layout class="QVBoxLayout" name="layout_search_buyer">
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -1154,7 +1209,7 @@ QPushButton {
            <item>
             <widget class="QStackedWidget" name="stackedWidget_mainapp_seller">
              <property name="currentIndex">
-              <number>0</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="page_home_seller">
               <property name="styleSheet">
@@ -1252,7 +1307,7 @@ QPushButton:focus {
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>150</width>
+                   <width>79</width>
                    <height>16777215</height>
                   </size>
                  </property>
