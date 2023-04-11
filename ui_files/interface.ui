@@ -927,6 +927,51 @@ QLineEdit {
                  <layout class="QVBoxLayout" name="verticalLayout_11">
                   <item>
                    <widget class="QScrollArea" name="scrollArea_buyer">
+                    <property name="styleSheet">
+                     <string notr="true">QScrollBar::vertical {
+	border:none;
+	width: 7px;
+	margin: 15px 0 15px 0;
+	border-radius: 0;
+}
+
+QScrollBar::handle:vertical {
+	background-color: rgb(67, 67, 67);
+	min-height: 30px;
+	border-radius: 3px;
+}
+
+QScrollBar::handle:hover {
+	background-color: rgb(255, 0, 127);
+}
+
+QScrollBar::sub-line:vertical {
+	border: none;
+	height: 8px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical {
+	border: none;
+	height: 8px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down:vertical {
+	background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
+	background: none;
+}
+</string>
+                    </property>
                     <property name="widgetResizable">
                      <bool>true</bool>
                     </property>
@@ -1532,8 +1577,8 @@ QLineEdit {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>1082</width>
-                       <height>529</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_2">
