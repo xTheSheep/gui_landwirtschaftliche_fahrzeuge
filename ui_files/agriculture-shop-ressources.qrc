@@ -5,7 +5,21 @@
     <file>assets/Logo2.png</file>
     <file>assets/Logo.png</file>
   </qresource>
+  <qresource prefix="icons_white">
+    <file>assets/icons/icons_png/icons_white/logout_FILL0_white.png</file>
+    <file>assets/icons/icons_png/icons_white/home_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/icons_white/refresh_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/icons_white/search_white.png</file>
+    <file>assets/icons/icons_png/icons_white/shopping_cart_checkout_white.png</file>
+  </qresource>
   <qresource prefix="icons">
+    <file>assets/icons/icons_png/add_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/add_shopping_cart_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/apps_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/arrow_downward_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/arrow_upward_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/refresh_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/shopping_cart_FILL0_wght400_GRAD0_opsz48.png</file>
     <file>assets/icons/done_FILL0_wght400_GRAD0_opsz48.svg</file>
     <file>assets/icons/home_FILL0_wght400_GRAD0_opsz48.svg</file>
     <file>assets/icons/logout_FILL0_wght400_GRAD0_opsz48.svg</file>

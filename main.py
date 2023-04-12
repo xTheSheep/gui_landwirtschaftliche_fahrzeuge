@@ -23,6 +23,7 @@ class Startscreen(QMainWindow):
         # setup buttons sidebar buyer
         self.home_button.clicked.connect(lambda: self.updatepage_buyer(0))
         self.search_button.clicked.connect(lambda: self.updatepage_buyer(1))
+        self.cart_button.clicked.connect(lambda: self.updatepage_buyer(2))
         self.logout_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
         # setup buttons sidebar seller
         self.home_button_seller.clicked.connect(lambda: self.updatepage_seller(0))
@@ -33,7 +34,9 @@ class Startscreen(QMainWindow):
             self.search_layout.addWidget(ItemView('test', 120000))
 
         for n in range(10):
-            self.layout_search_buyer.addWidget(ItemView('test', 120000))
+            temp = ItemView('test', 120000)
+            self.layout_search_buyer.addWidget(temp)
+            temp.addtochart(self.cart_buyer_layout)
 
     def refreshtable(self):
 
@@ -45,9 +48,12 @@ class Startscreen(QMainWindow):
         cursor.execute(query)
         result = cursor.fetchall()
 
+        #  NEXT: rework cart functionality, maybe put widgets in array? -> just push array items to layout
+
         for product in result:
-            self.layout_search_buyer.addWidget(ItemView(product[0], product[1], product[2],
-                                                        product[3], product[4], product[5]))
+            temp = ItemView(product[0], product[1], product[2], product[3], product[4], product[5])
+            self.layout_search_buyer.addWidget(temp)
+            temp.addtochart(self.cart_buyer_layout)
 
     def clearlayout(self):
         for i in reversed(range(self.layout_search_buyer.count())):
@@ -146,9 +152,16 @@ class ItemView(QWidget):
         loadUi("./ui_files/stockitem.ui", self)
         self.typ.setText(str(typ))
         self.hersteller.setText(str(hersteller))
+        self.year.setText('Year:' + str(baujahr))
         self.ps.setText(str(ps) + 'PS')
         self.kmh.setText(str(kmh) + 'km/h')
-        self.preis.setText(str(preis) + '€')
+        self.preis.setText('Price: ' + str(preis) + '€')
+
+    def addtochart(self, layout):
+        self.cart_button.clicked.connect(lambda: self.addselftochart(layout))
+
+    def addselftochart(self, layout):
+        layout.addWidget(self)
 
 
 database = QtSql.QSqlDatabase.addDatabase('QSQLITE')

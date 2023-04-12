@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1057</width>
+    <width>1082</width>
     <height>105</height>
    </rect>
   </property>
@@ -23,8 +23,7 @@
   padding: 9px 20px 8px;
   height: 20px;
 }
-.QPushButtonr:hover,
-.QPushButtonr:focus {
+.QPushButton:hover {
   background-color: rgb(54, 54, 54);
 }</string>
   </property>
@@ -57,7 +56,7 @@
        <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>0</number>
+       <number>14</number>
       </property>
       <property name="bottomMargin">
        <number>0</number>
@@ -158,7 +157,7 @@
         </layout>
        </widget>
       </item>
-      <item>
+      <item alignment="Qt::AlignVCenter">
        <widget class="QFrame" name="frame_4">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -176,7 +175,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Km/h</string>
+            <string>Speed: Km/h</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -192,7 +191,7 @@
             </font>
            </property>
            <property name="text">
-            <string>PS</string>
+            <string>Horsepower: PS</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -210,28 +209,60 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
           <widget class="QLabel" name="preis">
            <property name="font">
             <font>
              <family>Bahnschrift</family>
-             <pointsize>12</pointsize>
+             <pointsize>14</pointsize>
             </font>
            </property>
            <property name="text">
             <string>Preis</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="cart_button">
+          <widget class="QLabel" name="year">
+           <property name="font">
+            <font>
+             <family>Bahnschrift</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
            <property name="text">
-            <string>In den Warenkorb</string>
+            <string>Year</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
         </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cart_button">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string>Add to chart</string>
+        </property>
+        <property name="icon">
+         <iconset resource="agriculture-shop-ressources.qrc">
+          <normaloff>:/icons_white/assets/icons/icons_png/icons_white/shopping_cart_checkout_white.png</normaloff>:/icons_white/assets/icons/icons_png/icons_white/shopping_cart_checkout_white.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
        </widget>
       </item>
      </layout>
