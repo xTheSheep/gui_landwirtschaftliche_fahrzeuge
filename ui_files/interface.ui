@@ -40,7 +40,7 @@
        <cursorShape>ArrowCursor</cursorShape>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="login_page">
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -85,7 +85,7 @@ QLineEdit {
 </string>
           </property>
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::NoFrame</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
@@ -269,7 +269,7 @@ QLineEdit {
               </size>
              </property>
              <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
@@ -385,6 +385,7 @@ QLineEdit {
 
 QPushButton {
 	background-color: transparent;
+	border: none;
 }
 
 QPushButton:hover{
@@ -397,7 +398,7 @@ QPushButton:hover{
 </string>
           </property>
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::NoFrame</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
@@ -421,7 +422,7 @@ QPushButton:hover{
            <item alignment="Qt::AlignTop">
             <widget class="QFrame" name="nav_section_1">
              <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
@@ -467,6 +468,9 @@ QPushButton:hover{
                  </size>
                 </property>
                 <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
                  <bool>false</bool>
                 </property>
                 <property name="flat">
@@ -559,7 +563,7 @@ QPushButton:hover{
            <item alignment="Qt::AlignBottom">
             <widget class="QFrame" name="nav_section_bottom">
              <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
@@ -895,7 +899,7 @@ QAbstractSpinBox::down-button {
                   </size>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
+                  <enum>QFrame::NoFrame</enum>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
@@ -1095,7 +1099,7 @@ QAbstractSpinBox::down-button {
                <item>
                 <widget class="QFrame" name="frame_4">
                  <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
+                  <enum>QFrame::NoFrame</enum>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
@@ -1148,6 +1152,9 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
 }
 </string>
                     </property>
+                    <property name="frameShape">
+                     <enum>QFrame::NoFrame</enum>
+                    </property>
                     <property name="frameShadow">
                      <enum>QFrame::Raised</enum>
                     </property>
@@ -1159,8 +1166,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>1070</width>
-                       <height>440</height>
+                       <width>1078</width>
+                       <height>446</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="layout_search_buyer">
@@ -1220,6 +1227,9 @@ QPushButton:focus {
                </item>
                <item>
                 <widget class="QScrollArea" name="scrollArea_2">
+                 <property name="frameShape">
+                  <enum>QFrame::NoFrame</enum>
+                 </property>
                  <property name="widgetResizable">
                   <bool>true</bool>
                  </property>
@@ -1228,8 +1238,8 @@ QPushButton:focus {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1090</width>
-                    <height>640</height>
+                    <width>1096</width>
+                    <height>643</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="cart_buyer_layout"/>
@@ -1319,15 +1329,25 @@ QPushButton:focus {
           </property>
           <property name="styleSheet">
            <string notr="true">#sidebar_seller {
-	background-color: rgb(223, 223, 223);
+	background-color: rgb(43, 43, 57);
 }
 
 QPushButton {
 	background-color: transparent;
-}</string>
+	border: none;
+}
+
+QPushButton:hover{
+	background-color: rgb(23, 29, 53);
+	border-radius: 8px;
+}
+
+
+
+</string>
           </property>
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::NoFrame</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
@@ -1351,7 +1371,7 @@ QPushButton {
            <item alignment="Qt::AlignTop">
             <widget class="QFrame" name="nav_section_top_seller">
              <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
@@ -1382,7 +1402,7 @@ QPushButton {
                 </property>
                 <property name="icon">
                  <iconset resource="agriculture-shop-ressources.qrc">
-                  <normaloff>:/icons/assets/icons/home_FILL0_wght400_GRAD0_opsz48.svg</normaloff>:/icons/assets/icons/home_FILL0_wght400_GRAD0_opsz48.svg</iconset>
+                  <normaloff>:/icons_white/assets/icons/icons_png/icons_white/home_FILL0_wght400_GRAD0_opsz48.png</normaloff>:/icons_white/assets/icons/icons_png/icons_white/home_FILL0_wght400_GRAD0_opsz48.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -1420,7 +1440,7 @@ QPushButton {
                 </property>
                 <property name="icon">
                  <iconset resource="agriculture-shop-ressources.qrc">
-                  <normaloff>:/icons/assets/icons/search_FILL0_wght400_GRAD0_opsz48.svg</normaloff>:/icons/assets/icons/search_FILL0_wght400_GRAD0_opsz48.svg</iconset>
+                  <normaloff>:/icons_white/assets/icons/icons_png/icons_white/search_white.png</normaloff>:/icons_white/assets/icons/icons_png/icons_white/search_white.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -1455,7 +1475,7 @@ QPushButton {
                 </property>
                 <property name="icon">
                  <iconset resource="agriculture-shop-ressources.qrc">
-                  <normaloff>:/icons/assets/icons/shopping_cart_checkout_FILL0_wght400_GRAD0_opsz48.svg</normaloff>:/icons/assets/icons/shopping_cart_checkout_FILL0_wght400_GRAD0_opsz48.svg</iconset>
+                  <normaloff>:/icons_white/assets/icons/icons_png/icons_white/shopping_cart_checkout_white.png</normaloff>:/icons_white/assets/icons/icons_png/icons_white/shopping_cart_checkout_white.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -1471,7 +1491,7 @@ QPushButton {
            <item alignment="Qt::AlignBottom">
             <widget class="QFrame" name="nav_section_bottom_3">
              <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
+              <enum>QFrame::NoFrame</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
@@ -1499,7 +1519,7 @@ QPushButton {
                 </property>
                 <property name="icon">
                  <iconset resource="agriculture-shop-ressources.qrc">
-                  <normaloff>:/icons/assets/icons/logout_FILL0_wght400_GRAD0_opsz48.svg</normaloff>:/icons/assets/icons/logout_FILL0_wght400_GRAD0_opsz48.svg</iconset>
+                  <normaloff>:/icons_white/assets/icons/icons_png/icons_white/logout_FILL0_white.png</normaloff>:/icons_white/assets/icons/icons_png/icons_white/logout_FILL0_white.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -1732,7 +1752,7 @@ QLineEdit {
                   </size>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
+                  <enum>QFrame::NoFrame</enum>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
@@ -1828,7 +1848,7 @@ QLineEdit {
                <item>
                 <widget class="QFrame" name="frame_3">
                  <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
+                  <enum>QFrame::NoFrame</enum>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
@@ -1853,8 +1873,8 @@ QLineEdit {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>1082</width>
-                       <height>529</height>
+                       <width>1088</width>
+                       <height>533</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_2">
