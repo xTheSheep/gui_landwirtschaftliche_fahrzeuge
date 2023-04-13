@@ -631,7 +631,7 @@ QPushButton:hover{
            <item>
             <widget class="QStackedWidget" name="stackedWidget_mainapp">
              <property name="currentIndex">
-              <number>2</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="page_home">
               <property name="styleSheet">
@@ -1112,18 +1112,26 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                        <height>484</height>
                       </rect>
                      </property>
+                     <property name="styleSheet">
+                      <string notr="true">#frame:hover {
+	background-color: rgba(0, 0, 0, 10);
+}</string>
+                     </property>
                      <layout class="QVBoxLayout" name="layout_search_buyer">
+                      <property name="spacing">
+                       <number>10</number>
+                      </property>
                       <property name="leftMargin">
-                       <number>0</number>
+                       <number>9</number>
                       </property>
                       <property name="topMargin">
-                       <number>0</number>
+                       <number>9</number>
                       </property>
                       <property name="rightMargin">
-                       <number>0</number>
+                       <number>9</number>
                       </property>
                       <property name="bottomMargin">
-                       <number>0</number>
+                       <number>9</number>
                       </property>
                      </layout>
                     </widget>
@@ -1184,27 +1192,79 @@ QPushButton:focus {
                  </property>
                 </widget>
                </item>
-               <item alignment="Qt::AlignTop">
-                <widget class="QFrame" name="frame_6">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>300</height>
-                  </size>
+               <item>
+                <widget class="QScrollArea" name="scrollArea_3">
+                 <property name="styleSheet">
+                  <string notr="true">#frame {
+	background-color: rgba(0, 0, 0, 12);
+	border-radius: 20px;
+}
+
+QScrollBar::vertical {
+	border:none;
+	width: 7px;
+	margin: 15px 0 15px 0;
+	border-radius: 0;
+}
+
+QScrollBar::handle:vertical {
+	background-color: rgb(67, 67, 67);
+	min-height: 30px;
+	border-radius: 3px;
+}
+
+QScrollBar::handle:hover {
+	background-color: rgb(255, 0, 127);
+}
+
+QScrollBar::sub-line:vertical {
+	border: none;
+	height: 8px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical {
+	border: none;
+	height: 8px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down:vertical {
+	background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
+	background: none;
+}
+</string>
                  </property>
                  <property name="frameShape">
                   <enum>QFrame::NoFrame</enum>
                  </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
+                 <property name="widgetResizable">
+                  <bool>true</bool>
                  </property>
-                 <layout class="QVBoxLayout" name="configuration_layout"/>
+                 <widget class="QWidget" name="scrollAreaWidgetContents_4">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>1096</width>
+                    <height>639</height>
+                   </rect>
+                  </property>
+                  <layout class="QVBoxLayout" name="configuration_layout">
+                   <property name="spacing">
+                    <number>3</number>
+                   </property>
+                  </layout>
+                 </widget>
                 </widget>
                </item>
                <item alignment="Qt::AlignRight">
@@ -1238,19 +1298,6 @@ QPushButton:focus {
                   </size>
                  </property>
                 </widget>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
               </layout>
              </widget>
@@ -1306,8 +1353,8 @@ QPushButton:focus {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1096</width>
-                    <height>642</height>
+                    <width>65</width>
+                    <height>18</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="cart_buyer_layout"/>

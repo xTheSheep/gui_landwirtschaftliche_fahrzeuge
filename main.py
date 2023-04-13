@@ -205,7 +205,7 @@ class ItemView(QWidget):
         result = cursor.fetchall()
         for extra in result:
             if extra[3] == 1 and self.hersteller.text() == 'Fendt':
-                layout.addWidget(QLabel(extra[0]))
+                layout.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[4] == 1 and self.hersteller.text() == 'Claas':
                 layout.addWidget(QLabel(extra[0]))
             elif extra[5] == 1 and self.hersteller.text() == 'John Deere':
@@ -228,6 +228,19 @@ class ItemView(QWidget):
                 layout.addWidget(QLabel(extra[0]))
         self.cart_button.deleteLater()
         screen.setCurrentIndex(2)
+
+
+class ExtraItem(QWidget):
+    def __init__(self, name='name', preis='preis', stock='stock'):
+        super(ExtraItem, self).__init__()
+        loadUi("./ui_files/extra_item.ui", self)
+        self.stock.setText('Stock: ' + str(stock))
+        self.price.setText('Price: ' + str(preis) + '€')
+        self.name.setText(str(name))
+        # picture = QPixmap(f"./ui_files/product_images/{hersteller}_{typ}.jpg")
+        # self.picture.setPixmap(picture)
+        # self.picture.mousePressEvent = lambda event: self.showimage(picture)
+
 
 class PreviewImage(QWidget):
     def __init__(self):
