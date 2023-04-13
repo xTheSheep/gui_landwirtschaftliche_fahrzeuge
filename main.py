@@ -2,9 +2,11 @@ import sys
 import sqlite3
 from ui_files import ressources_interface
 from PyQt5.uic import loadUi
-from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget
-from PyQt5.QtGui import QDoubleValidator
-from PyQt5 import QtSql
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget, QLabel
+from PyQt5.QtGui import QDoubleValidator, QPixmap
+
+# workflow: warenkorb, zusatzgeräte, sortieren von items, verkäufer, budgetverwaltung, zoom bild, hotkeys (esc etc)
+#
 
 
 # screens
@@ -20,6 +22,13 @@ class Startscreen(QMainWindow):
         self.pushButton_4.clicked.connect(self.login)
         self.pushButton.clicked.connect(self.register)
         self.searchitem_button.clicked.connect(self.refreshtable)
+        self.clear_button_buyer.clicked.connect(self.clearsearchfields)
+        # add validators to search fields
+        self.search_field_ps_buyer.setValidator(QDoubleValidator(1, 10000000000, 0))
+        self.search_field_kmh_buyer.setValidator(QDoubleValidator(1, 10000000000, 0))
+        self.search_field_max_price_buyer.setValidator(QDoubleValidator(1, 10000000000, 0))
+        self.search_field_min_price_buyer.setValidator(QDoubleValidator(1, 10000000000, 0))
+        self.search_field_year_buyer.setValidator(QDoubleValidator(1, 10000000000, 0))
         # setup buttons sidebar buyer
         self.home_button.clicked.connect(lambda: self.updatepage_buyer(0))
         self.search_button.clicked.connect(lambda: self.updatepage_buyer(1))
@@ -30,30 +39,52 @@ class Startscreen(QMainWindow):
         self.search_button_seller.clicked.connect(lambda: self.updatepage_seller(1))
         self.logout_button_seller.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
 
-        for n in range(10):
-            self.search_layout.addWidget(ItemView('test', 120000))
-
-        for n in range(10):
-            temp = ItemView('test', 120000)
-            self.layout_search_buyer.addWidget(temp)
-            temp.addtochart(self.cart_buyer_layout)
-
     def refreshtable(self):
-
         self.clearlayout()
-
         db = sqlite3.connect("db.db")
         cursor = db.cursor()
         query = 'SELECT * FROM bestand'
         cursor.execute(query)
         result = cursor.fetchall()
-
-        #  NEXT: rework cart functionality, maybe put widgets in array? -> just push array items to layout
+        search_results = result.copy()
 
         for product in result:
-            temp = ItemView(product[0], product[1], product[2], product[3], product[4], product[5])
+            if product[6] == 0:
+                search_results.remove(product)
+                continue
+            if self.search_field_ps_buyer.text() != '':
+                if product[2] <= int(self.search_field_ps_buyer.text()):
+                    search_results.remove(product)
+                    continue
+            if self.search_field_kmh_buyer.text() != '':
+                if product[3] <= int(self.search_field_kmh_buyer.text()):
+                    search_results.remove(product)
+                    continue
+            if self.search_field_min_price_buyer.text() != '':
+                if product[4] <= int(self.search_field_min_price_buyer.text()):
+                    search_results.remove(product)
+                    continue
+            if self.search_field_max_price_buyer.text() != '':
+                if product[4] >= int(self.search_field_max_price_buyer.text()):
+                    search_results.remove(product)
+                    continue
+            if self.search_field_year_buyer.text() != '':
+                if product[5] <= int(self.search_field_year_buyer.text()):
+                    search_results.remove(product)
+                    continue
+
+        for product in search_results:
+            temp = ItemView(product[0], product[1], product[2], product[3], product[4], product[5], product[6])
             self.layout_search_buyer.addWidget(temp)
-            temp.addtochart(self.cart_buyer_layout)
+            temp.addtochart(self.configuration_layout, self.stackedWidget_mainapp)
+
+    def clearsearchfields(self):
+        self.search_field_ps_buyer.setText('')
+        self.search_field_kmh_buyer.setText('')
+        self.search_field_max_price_buyer.setText('')
+        self.search_field_min_price_buyer.setText('')
+        self.search_field_year_buyer.setText('')
+        self.refreshtable()
 
     def clearlayout(self):
         for i in reversed(range(self.layout_search_buyer.count())):
@@ -85,6 +116,7 @@ class Startscreen(QMainWindow):
                 self.welcome_label.setText(f'welcome back {user}'.upper())
                 self.startpage_budget_label.setText(f'Budget {int(self.budget)} €')
                 self.searchpage_budget_label.setText(f'Budget {int(self.budget)} €')
+                self.refreshtable()
                 self.stackedWidget.setCurrentIndex(1)  # switch to buyerpage
                 self.hint_login_information.setText('')
                 self.input_password.setText('')
@@ -107,15 +139,8 @@ class CreateAccountDialog(QDialog):
     def __init__(self):
         super(CreateAccountDialog, self).__init__()
         loadUi("./ui_files/newaccountdialog.ui", self)
-        self.input_budget.editingFinished.connect(self.validate)
+        self.input_budget.setValidator(QDoubleValidator(1, 10000000000, 0))
         self.createAccount_button.clicked.connect(self.createaccount)
-
-    def validate(self):
-        rule = QDoubleValidator(1, 10000000000, 0)
-        if rule.validate(self.input_budget.text(), 14)[0] == 2:
-            pass
-        else:
-            self.input_budget.setText('')
 
     def createaccount(self):
         username = self.input_username.text()
@@ -147,7 +172,7 @@ class CreateAccountDialog(QDialog):
 
 
 class ItemView(QWidget):
-    def __init__(self, hersteller='hersteller', typ='typ', ps='ps', kmh='kmh', preis='preis', baujahr='baujahr'):
+    def __init__(self, hersteller='hersteller', typ='typ', ps='ps', kmh='kmh', preis='preis', baujahr='baujahr', stock='stock'):
         super(ItemView, self).__init__()
         loadUi("./ui_files/stockitem.ui", self)
         self.typ.setText(str(typ))
@@ -156,20 +181,34 @@ class ItemView(QWidget):
         self.ps.setText(str(ps) + 'PS')
         self.kmh.setText(str(kmh) + 'km/h')
         self.preis.setText('Price: ' + str(preis) + '€')
+        self.stock.setText('Stock: ' + str(stock))
+        picture = QPixmap(f"./ui_files/product_images/{hersteller}_{typ}.jpg")
+        self.picture.setPixmap(picture)
+        self.picture.mousePressEvent = lambda event: self.showimage(picture)
 
-    def addtochart(self, layout):
-        self.cart_button.clicked.connect(lambda: self.addselftochart(layout))
+    def showimage(self, event):
+        preview.show()
+        preview.big_picture.setPixmap(event)
 
-    def addselftochart(self, layout):
+    def addtochart(self, layout, screen):
+        self.cart_button.clicked.connect(lambda: self.addselftochart(layout, screen))
+
+    def addselftochart(self, layout, screen):
         layout.addWidget(self)
+        screen.setCurrentIndex(2)
 
+class PreviewImage(QWidget):
+    def __init__(self):
+        super(PreviewImage, self).__init__()
+        loadUi("./ui_files/preview_picture.ui", self)
 
-database = QtSql.QSqlDatabase.addDatabase('QSQLITE')
-database.setDatabaseName("db.db")
+    def setpicture(self, image):
+        self.big_picture.setPixmap(image)
 
 # main
 app = QApplication(sys.argv)
 homescreen = Startscreen()
+preview = PreviewImage()
 homescreen.show()
 registerwindow = CreateAccountDialog()
 
