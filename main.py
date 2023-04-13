@@ -32,7 +32,7 @@ class Startscreen(QMainWindow):
         # setup buttons sidebar buyer
         self.home_button.clicked.connect(lambda: self.updatepage_buyer(0))
         self.search_button.clicked.connect(lambda: self.updatepage_buyer(1))
-        self.cart_button.clicked.connect(lambda: self.updatepage_buyer(2))
+        self.cart_button.clicked.connect(lambda: self.updatepage_buyer(3))
         self.logout_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
         # setup buttons sidebar seller
         self.home_button_seller.clicked.connect(lambda: self.updatepage_seller(0))
@@ -194,7 +194,39 @@ class ItemView(QWidget):
         self.cart_button.clicked.connect(lambda: self.addselftochart(layout, screen))
 
     def addselftochart(self, layout, screen):
+        for i in reversed(range(layout.count())):
+            layout.itemAt(i).widget().deleteLater()
+
         layout.addWidget(self)
+        db = sqlite3.connect("db.db")
+        cursor = db.cursor()
+        query = 'SELECT * FROM zusatzgeraete'
+        cursor.execute(query)
+        result = cursor.fetchall()
+        for extra in result:
+            if extra[3] == 1 and self.hersteller.text() == 'Fendt':
+                layout.addWidget(QLabel(extra[0]))
+            elif extra[4] == 1 and self.hersteller.text() == 'Claas':
+                layout.addWidget(QLabel(extra[0]))
+            elif extra[5] == 1 and self.hersteller.text() == 'John Deere':
+                layout.addWidget(QLabel(extra[0]))
+            elif extra[6] == 1 and self.hersteller.text() == 'Steyr':
+                layout.addWidget(QLabel(extra[0]))
+            elif extra[7] == 1 and self.hersteller.text() == 'Deutz':
+                layout.addWidget(QLabel(extra[0]))
+            elif extra[10] == 1 and self.hersteller.text() == 'JCB':
+                layout.addWidget(QLabel(extra[0]))
+            elif extra[9] == 1 and self.hersteller.text() == 'New Holland':
+                layout.addWidget(QLabel(extra[0]))
+            elif extra[11] == 1 and self.hersteller.text() == 'Valtra':
+                layout.addWidget(QLabel(extra[0]))
+            elif extra[8] == 1 and self.hersteller.text() == 'Kubota':
+                layout.addWidget(QLabel(extra[0]))
+            elif extra[12] == 1 and self.hersteller.text() == 'Massey Ferguson':
+                layout.addWidget(QLabel(extra[0]))
+            elif extra[13] == 1 and self.hersteller.text() == 'Lindner':
+                layout.addWidget(QLabel(extra[0]))
+        self.cart_button.deleteLater()
         screen.setCurrentIndex(2)
 
 class PreviewImage(QWidget):
