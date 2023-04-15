@@ -1,12 +1,13 @@
 import sys
 import sqlite3
+from PyQt5.QtCore import QPoint, Qt
 from ui_files import ressources_interface
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget, QLabel
-from PyQt5.QtGui import QDoubleValidator, QPixmap
+from PyQt5.QtGui import QDoubleValidator, QPixmap, QPainter, QCursor
 
-# workflow: warenkorb, zusatzgeräte, sortieren von items, verkäufer, budgetverwaltung, zoom bild, hotkeys (esc etc)
-#
+
+# workflow: warenkorb, zusatzgeräte, sortieren von items, verkäufer, budgetverwaltung, hotkeys (esc etc)
 
 
 # screens
@@ -73,10 +74,25 @@ class Startscreen(QMainWindow):
                     search_results.remove(product)
                     continue
 
+        if self.sort_field_buyer.currentIndex() != 0:
+            descending = True
+            if self.sort_field_buyer.currentIndex() == 1:
+                index = 2
+            elif self.sort_field_buyer.currentIndex() == 2:
+                index = 3
+            elif self.sort_field_buyer.currentIndex() == 3:
+                index = 4
+                descending = False
+            elif self.sort_field_buyer.currentIndex() == 4:
+                index = 4
+            elif self.sort_field_buyer.currentIndex() == 5:
+                index = 5
+            search_results.sort(reverse=descending, key=lambda x: x[index])
+
         for product in search_results:
             temp = ItemView(product[0], product[1], product[2], product[3], product[4], product[5], product[6])
             self.layout_search_buyer.addWidget(temp)
-            temp.addtochart(self.configuration_layout, self.stackedWidget_mainapp)
+            temp.addtochart(self.configuration_layout_stockitem, self.configuration_layout, self.stackedWidget_mainapp)
 
     def clearsearchfields(self):
         self.search_field_ps_buyer.setText('')
@@ -188,16 +204,18 @@ class ItemView(QWidget):
 
     def showimage(self, event):
         preview.show()
-        preview.big_picture.setPixmap(event)
+        preview.set_pixmap(event)
 
-    def addtochart(self, layout, screen):
-        self.cart_button.clicked.connect(lambda: self.addselftochart(layout, screen))
+    def addtochart(self, layoutitem, layoutextras, screen):
+        self.cart_button.clicked.connect(lambda: self.addselftochart(layoutitem, layoutextras, screen))
 
-    def addselftochart(self, layout, screen):
-        for i in reversed(range(layout.count())):
-            layout.itemAt(i).widget().deleteLater()
+    def addselftochart(self, layoutitem, layoutextras,  screen):
+        for i in reversed(range(layoutitem.count())):
+            layoutitem.itemAt(i).widget().deleteLater()
+        for i in reversed(range(layoutextras.count())):
+            layoutextras.itemAt(i).widget().deleteLater()
 
-        layout.addWidget(self)
+        layoutitem.addWidget(self)
         db = sqlite3.connect("db.db")
         cursor = db.cursor()
         query = 'SELECT * FROM zusatzgeraete'
@@ -205,27 +223,27 @@ class ItemView(QWidget):
         result = cursor.fetchall()
         for extra in result:
             if extra[3] == 1 and self.hersteller.text() == 'Fendt':
-                layout.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
+                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[4] == 1 and self.hersteller.text() == 'Claas':
-                layout.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(QLabel(extra[0]))
             elif extra[5] == 1 and self.hersteller.text() == 'John Deere':
-                layout.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(QLabel(extra[0]))
             elif extra[6] == 1 and self.hersteller.text() == 'Steyr':
-                layout.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(QLabel(extra[0]))
             elif extra[7] == 1 and self.hersteller.text() == 'Deutz':
-                layout.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(QLabel(extra[0]))
             elif extra[10] == 1 and self.hersteller.text() == 'JCB':
-                layout.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(QLabel(extra[0]))
             elif extra[9] == 1 and self.hersteller.text() == 'New Holland':
-                layout.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(QLabel(extra[0]))
             elif extra[11] == 1 and self.hersteller.text() == 'Valtra':
-                layout.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(QLabel(extra[0]))
             elif extra[8] == 1 and self.hersteller.text() == 'Kubota':
-                layout.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(QLabel(extra[0]))
             elif extra[12] == 1 and self.hersteller.text() == 'Massey Ferguson':
-                layout.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(QLabel(extra[0]))
             elif extra[13] == 1 and self.hersteller.text() == 'Lindner':
-                layout.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(QLabel(extra[0]))
         self.cart_button.deleteLater()
         screen.setCurrentIndex(2)
 
@@ -242,18 +260,55 @@ class ExtraItem(QWidget):
         # self.picture.mousePressEvent = lambda event: self.showimage(picture)
 
 
-class PreviewImage(QWidget):
-    def __init__(self):
-        super(PreviewImage, self).__init__()
-        loadUi("./ui_files/preview_picture.ui", self)
+class ZoomablePixmapWidget(QLabel):
+    def __init__(self, pixmap):
+        super().__init__()
+        self.pixmap = pixmap
+        self.zoom_factor = 1.0
+        self.setGeometry(100, 100, 800, 600)
+        self.setWindowTitle('Preview')
+        self.pan_start = QPoint()
+        self.pixmap_offset = QPoint()
+        self.setPixmap(self.pixmap)
 
-    def setpicture(self, image):
-        self.big_picture.setPixmap(image)
+    def set_pixmap(self, pixmap):
+        self.pixmap = pixmap
+        self.update()
+
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.scale(self.zoom_factor, self.zoom_factor)
+        painter.translate(self.pixmap_offset)
+        painter.drawPixmap(0, 0, self.pixmap)
+
+    def wheelEvent(self, event):
+        # Zoom in/out using mouse wheel
+        zoom_factor = 1.25 if event.angleDelta().y() > 0 else 0.8
+        self.zoom_factor *= zoom_factor
+        self.update()
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.pan_start = event.pos()
+            self.setCursor(QCursor(Qt.ClosedHandCursor))
+
+    def mouseMoveEvent(self, event):
+        if event.buttons() & Qt.LeftButton:
+            delta = event.pos() - self.pan_start
+            self.pan_start = event.pos()
+            self.pixmap_offset += delta
+            self.update()
+
+    def mouseReleaseEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.pan_start = QPoint()
+            self.setCursor(QCursor(Qt.ArrowCursor))
+
 
 # main
 app = QApplication(sys.argv)
 homescreen = Startscreen()
-preview = PreviewImage()
+preview = ZoomablePixmapWidget(QPixmap('./ui_files/product_images/JCB_7270.jpg'))
 homescreen.show()
 registerwindow = CreateAccountDialog()
 

@@ -818,7 +818,7 @@ QPushButton:focus {
   background-color: rgb(54, 54, 54);
 }
 
-QLineEdit, QSpinBox {
+QLineEdit, QComboBox {
   color: rgba(0,0,0,.87);
   padding: 20px 16px 6px;
   background: #ececec;
@@ -830,16 +830,31 @@ QLineEdit, QSpinBox {
   height: 20px;
 }
 
-QAbstractSpinBox::up-button {
-	subcontrol-origin: margin;
-    subcontrol-position: top right;
-	width: 20px;
+QComboBox:editable {
+    background-color: #ececec;
+    border: 1px solid #999; 
+    border-radius: 4px; 
+    padding: 6px;
 }
 
-QAbstractSpinBox::down-button {
-	subcontrol-origin: margin;
-	width: 20px;
+QComboBox {
+	color: grey;
 }
+
+QComboBox::drop-down {
+    width: 20px; 
+    background-color: #ececec;
+    subcontrol-origin: padding;
+    subcontrol-position: right center;
+}
+
+QComboBox::down-arrow {
+    image: url(:/icons/assets/icons/icons_png/arrow_drop_down_FILL0_wght400_GRAD0_opsz48.png);
+    width:20px; 
+    height: 20px; 
+	margin-right: 20px;
+}
+
 </string>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,0,0,0">
@@ -959,6 +974,64 @@ QAbstractSpinBox::down-button {
                     <property name="placeholderText">
                      <string>Max €</string>
                     </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QComboBox" name="sort_field_buyer">
+                    <property name="editable">
+                     <bool>false</bool>
+                    </property>
+                    <property name="currentText">
+                     <string>(No Sorting)</string>
+                    </property>
+                    <property name="currentIndex">
+                     <number>0</number>
+                    </property>
+                    <property name="sizeAdjustPolicy">
+                     <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+                    </property>
+                    <property name="minimumContentsLength">
+                     <number>0</number>
+                    </property>
+                    <property name="placeholderText">
+                     <string>Sort by</string>
+                    </property>
+                    <property name="frame">
+                     <bool>false</bool>
+                    </property>
+                    <property name="modelColumn">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>(No Sorting)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Sort by PS</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Sort by Km/h</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Sort by Price (Ascending)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Sort by Price (Descending)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Sort by Year</string>
+                     </property>
+                    </item>
                    </widget>
                   </item>
                  </layout>
@@ -1193,14 +1266,71 @@ QPushButton:focus {
                 </widget>
                </item>
                <item>
+                <spacer name="verticalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_6">
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QVBoxLayout" name="configuration_layout_stockitem"/>
+                </widget>
+               </item>
+               <item>
+                <widget class="QWidget" name="widget_2" native="true">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>4</width>
+                   <height>4</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>4</height>
+                  </size>
+                 </property>
+                 <property name="baseSize">
+                  <size>
+                   <width>1000</width>
+                   <height>4</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgba(0, 0, 0, 20);
+border-radius: 2px;</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QScrollArea" name="scrollArea_3">
                  <property name="styleSheet">
-                  <string notr="true">#frame {
-	background-color: rgba(0, 0, 0, 12);
-	border-radius: 20px;
-}
-
-QScrollBar::vertical {
+                  <string notr="true">QScrollBar::vertical {
 	border:none;
 	width: 7px;
 	margin: 15px 0 15px 0;
@@ -1256,7 +1386,7 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                     <x>0</x>
                     <y>0</y>
                     <width>1096</width>
-                    <height>639</height>
+                    <height>505</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="configuration_layout">
@@ -1298,6 +1428,22 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                   </size>
                  </property>
                 </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Maximum</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </widget>
@@ -1353,8 +1499,8 @@ QPushButton:focus {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>65</width>
-                    <height>18</height>
+                    <width>100</width>
+                    <height>30</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="cart_buyer_layout"/>
@@ -1998,8 +2144,8 @@ QLineEdit {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>16</width>
-                       <height>16</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_2">

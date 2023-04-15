@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1082</width>
-    <height>108</height>
+    <height>101</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,8 @@
 }
 .QPushButton:hover {
   background-color: rgb(54, 54, 54);
-}</string>
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -88,11 +89,11 @@
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
+         <item alignment="Qt::AlignHCenter">
           <widget class="QLabel" name="picture">
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
+             <width>130</width>
              <height>80</height>
             </size>
            </property>
@@ -129,7 +130,7 @@
           <widget class="QLabel" name="hersteller">
            <property name="font">
             <font>
-             <family>Bahnschrift</family>
+             <family>Bahnschrift SemiLight</family>
              <pointsize>14</pointsize>
             </font>
            </property>
@@ -145,8 +146,8 @@
           <widget class="QLabel" name="typ">
            <property name="font">
             <font>
-             <family>Bahnschrift</family>
-             <pointsize>14</pointsize>
+             <family>Bahnschrift SemiBold</family>
+             <pointsize>16</pointsize>
             </font>
            </property>
            <property name="text">
@@ -168,24 +169,8 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
-         <item>
-          <widget class="QLabel" name="kmh">
-           <property name="font">
-            <font>
-             <family>Bahnschrift</family>
-             <pointsize>14</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Speed: Km/h</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="1" column="1">
           <widget class="QLabel" name="ps">
            <property name="font">
             <font>
@@ -194,10 +179,70 @@
             </font>
            </property>
            <property name="text">
-            <string>Horsepower: PS</string>
+            <string>PS</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="kmh">
+           <property name="font">
+            <font>
+             <family>Bahnschrift</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string> Km/h</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="maximumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="agriculture-shop-ressources.qrc">:/icons/assets/icons/icons_png/speed_FILL0_wght400_GRAD0_opsz48.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="maximumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="agriculture-shop-ressources.qrc">:/icons/assets/icons/icons_png/readiness_score_FILL0_wght400_GRAD0_opsz48.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -212,8 +257,46 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
-         <item>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_4">
+           <property name="maximumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="agriculture-shop-ressources.qrc">:/icons/assets/icons/icons_png/factory_FILL0_wght400_GRAD0_opsz48.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="year">
+           <property name="font">
+            <font>
+             <family>Bahnschrift</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Year</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
           <widget class="QLabel" name="preis">
            <property name="font">
             <font>
@@ -225,20 +308,26 @@
             <string>Preis</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignCenter</set>
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QLabel" name="year">
-           <property name="font">
-            <font>
-             <family>Bahnschrift</family>
-             <pointsize>14</pointsize>
-            </font>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="maximumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
            </property>
            <property name="text">
-            <string>Year</string>
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>assets/icons/icons_png/shopping_cart_FILL0_wght400_GRAD0_opsz48.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -251,12 +340,12 @@
       <item alignment="Qt::AlignVCenter">
        <widget class="QFrame" name="frame_6">
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::NoFrame</enum>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_6">
+        <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
           <widget class="QLabel" name="stock">
            <property name="font">

@@ -6,6 +6,13 @@
     <file>assets/Logo.png</file>
   </qresource>
   <qresource prefix="icons_white">
+    <file>assets/icons/icons_png/icons_white/agriculture_white.png</file>
+    <file>assets/icons/icons_png/icons_white/badge_white.png</file>
+    <file>assets/icons/icons_png/icons_white/factory_white.png</file>
+    <file>assets/icons/icons_png/icons_white/inventory_white.png</file>
+    <file>assets/icons/icons_png/icons_white/readiness_score_white.png</file>
+    <file>assets/icons/icons_png/icons_white/signature_white.png</file>
+    <file>assets/icons/icons_png/icons_white/speed_white.png</file>
     <file>assets/icons/icons_png/icons_white/logout_FILL0_white.png</file>
     <file>assets/icons/icons_png/icons_white/home_FILL0_wght400_GRAD0_opsz48.png</file>
     <file>assets/icons/icons_png/icons_white/refresh_FILL0_wght400_GRAD0_opsz48.png</file>
@@ -13,6 +20,19 @@
     <file>assets/icons/icons_png/icons_white/shopping_cart_checkout_white.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>assets/icons/icons_png/arrow_drop_down_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/shelves_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/warehouse_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/agriculture_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/badge_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/factory_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/inventory_2_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/readiness_score_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/signature_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/speed_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/toggle_on_FILL1_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/toggle_off_FILL0_wght400_GRAD0_opsz48.png</file>
+    <file>assets/icons/icons_png/toggle_on_FILL0_wght400_GRAD0_opsz48.png</file>
     <file>assets/icons/icons_png/add_FILL0_wght400_GRAD0_opsz48.png</file>
     <file>assets/icons/icons_png/add_shopping_cart_FILL0_wght400_GRAD0_opsz48.png</file>
     <file>assets/icons/icons_png/apps_FILL0_wght400_GRAD0_opsz48.png</file>
