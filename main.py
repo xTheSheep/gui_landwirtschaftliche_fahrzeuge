@@ -51,7 +51,7 @@ class Startscreen(QMainWindow):
         search_results = result.copy()
 
         for product in result:
-            if product[6] == 0 and self.stackedWidget.currentIndex() != 2:
+            if product[6] == 0 and self.isseller():
                 search_results.remove(product)
                 continue
             if self.search_field_ps_buyer.text() != '':
@@ -75,7 +75,7 @@ class Startscreen(QMainWindow):
                     search_results.remove(product)
                     continue
 
-        if self.sort_field_buyer.currentIndex() != 0 or self.stackedWidget.currentIndex() == 2:
+        if self.sort_field_buyer.currentIndex() != 0 or not self.isseller():
             descending = True
             if self.sort_field_buyer.currentIndex() == 1:
                 index = 2
@@ -91,7 +91,7 @@ class Startscreen(QMainWindow):
             elif self.sortbox_seller.currentIndex() == 0:
                 index = 6
                 descending = False
-            elif self.sortbox_seller.currentIndex() == 1:
+            elif self.sortbox_seller.currentIndex() == 1 and not self.isseller():
                 index = 6
             search_results.sort(reverse=descending, key=lambda x: x[index])
 
@@ -139,9 +139,7 @@ class Startscreen(QMainWindow):
             elif result[0] == password and result[2] == 0:  # login as buyer
                 self.user = user
                 self.budget = result[1]
-                self.welcome_label.setText(f'welcome back {user}'.upper())
-                self.startpage_budget_label.setText(f'Budget {int(self.budget)} €')
-                self.searchpage_budget_label.setText(f'Budget {int(self.budget)} €')
+                self.setuservalues()
                 self.clearsearchfields()
                 self.refreshtable()
                 self.stackedWidget.setCurrentIndex(1)  # switch to buyerpage
@@ -151,11 +149,11 @@ class Startscreen(QMainWindow):
             elif result[0] == password and result[2] == 1:  # login as seller
                 self.user = user
                 self.budget = result[1]
-                self.welcome_label_username.setText(f'welcome back {user}'.upper())
-                self.welcome_label_budget.setText(f'your current budget is {int(result[1])}€'.upper())
+                self.setuservalues()
                 self.clearsearchfields()
                 self.stackedWidget.setCurrentIndex(2)  # switch to sellerpage
                 self.refreshtable()
+                self.hint_login_information.setText('')
                 self.input_password.setText('')
                 self.updatepage_seller(0)
             else:
@@ -163,6 +161,16 @@ class Startscreen(QMainWindow):
 
     def register(self):
         registerwindow.show()
+
+    def isseller(self):
+        return self.stackedWidget.currentIndex() == 1
+
+    def setuservalues(self):
+        self.welcome_label.setText(f'welcome back {self.user}'.upper())
+        self.startpage_budget_label.setText(f'Budget {int(self.budget)} €')
+        self.searchpage_budget_label.setText(f'Budget {int(self.budget)} €')
+        self.welcome_label_username.setText(f'welcome back {self.user}'.upper())
+        self.welcome_label_budget.setText(f'your current budget is {int(self.budget)}€'.upper())
 
 
 class CreateAccountDialog(QDialog):
