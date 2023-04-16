@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget, QLabel
 from PyQt5.QtGui import QDoubleValidator, QPixmap, QPainter, QCursor
 
 
-# workflow: warenkorb, zusatzgeräte, sortieren von items, verkäufer, budgetverwaltung, hotkeys (esc etc)
+# workflow: warenkorb, zusatzgeräte, verkäufer, budgetverwaltung, hotkeys (esc etc)
 
 
 # screens
@@ -23,6 +23,7 @@ class Startscreen(QMainWindow):
         self.pushButton_4.clicked.connect(self.login)
         self.pushButton.clicked.connect(self.register)
         self.searchitem_button.clicked.connect(self.refreshtable)
+        self.searchitem_button_seller.clicked.connect(self.refreshtable)
         self.clear_button_buyer.clicked.connect(self.clearsearchfields)
         # add validators to search fields
         self.search_field_ps_buyer.setValidator(QDoubleValidator(1, 10000000000, 0))
@@ -50,7 +51,7 @@ class Startscreen(QMainWindow):
         search_results = result.copy()
 
         for product in result:
-            if product[6] == 0:
+            if product[6] == 0 and self.stackedWidget.currentIndex() != 2:
                 search_results.remove(product)
                 continue
             if self.search_field_ps_buyer.text() != '':
@@ -74,24 +75,31 @@ class Startscreen(QMainWindow):
                     search_results.remove(product)
                     continue
 
-        if self.sort_field_buyer.currentIndex() != 0:
+        if self.sort_field_buyer.currentIndex() != 0 or self.stackedWidget.currentIndex() == 2:
             descending = True
             if self.sort_field_buyer.currentIndex() == 1:
                 index = 2
             elif self.sort_field_buyer.currentIndex() == 2:
                 index = 3
-            elif self.sort_field_buyer.currentIndex() == 3:
+            elif self.sort_field_buyer.currentIndex() == 3 or self.sortbox_seller.currentIndex() == 2:
                 index = 4
                 descending = False
-            elif self.sort_field_buyer.currentIndex() == 4:
+            elif self.sort_field_buyer.currentIndex() == 4 or self.sortbox_seller.currentIndex() == 2:
                 index = 4
             elif self.sort_field_buyer.currentIndex() == 5:
                 index = 5
+            elif self.sortbox_seller.currentIndex() == 0:
+                index = 6
+                descending = False
+            elif self.sortbox_seller.currentIndex() == 1:
+                index = 6
             search_results.sort(reverse=descending, key=lambda x: x[index])
 
         for product in search_results:
             temp = ItemView(product[0], product[1], product[2], product[3], product[4], product[5], product[6])
+            temp2 = ItemView(product[0], product[1], product[2], product[3], product[4], product[5], product[6])
             self.layout_search_buyer.addWidget(temp)
+            self.layout_search_seller.addWidget(temp2)
             temp.addtochart(self.configuration_layout_stockitem, self.configuration_layout, self.stackedWidget_mainapp)
 
     def clearsearchfields(self):
@@ -100,11 +108,13 @@ class Startscreen(QMainWindow):
         self.search_field_max_price_buyer.setText('')
         self.search_field_min_price_buyer.setText('')
         self.search_field_year_buyer.setText('')
+        self.sort_field_buyer.setCurrentIndex(0)
         self.refreshtable()
 
     def clearlayout(self):
         for i in reversed(range(self.layout_search_buyer.count())):
             self.layout_search_buyer.itemAt(i).widget().deleteLater()
+            self.layout_search_seller.itemAt(i).widget().deleteLater()
 
     def updatepage_buyer(self, number):
         self.stackedWidget_mainapp.setCurrentIndex(number)
@@ -132,6 +142,7 @@ class Startscreen(QMainWindow):
                 self.welcome_label.setText(f'welcome back {user}'.upper())
                 self.startpage_budget_label.setText(f'Budget {int(self.budget)} €')
                 self.searchpage_budget_label.setText(f'Budget {int(self.budget)} €')
+                self.clearsearchfields()
                 self.refreshtable()
                 self.stackedWidget.setCurrentIndex(1)  # switch to buyerpage
                 self.hint_login_information.setText('')
@@ -140,8 +151,11 @@ class Startscreen(QMainWindow):
             elif result[0] == password and result[2] == 1:  # login as seller
                 self.user = user
                 self.budget = result[1]
-                self.welcome_label.setText(f'welcome back {user}'.upper())
+                self.welcome_label_username.setText(f'welcome back {user}'.upper())
+                self.welcome_label_budget.setText(f'your current budget is {int(result[1])}€'.upper())
+                self.clearsearchfields()
                 self.stackedWidget.setCurrentIndex(2)  # switch to sellerpage
+                self.refreshtable()
                 self.input_password.setText('')
                 self.updatepage_seller(0)
             else:
