@@ -141,8 +141,8 @@ class Startscreen(QMainWindow):
                 self.budget = result[1]
                 self.setuservalues()
                 self.clearsearchfields()
-                self.refreshtable()
                 self.stackedWidget.setCurrentIndex(1)  # switch to buyerpage
+                self.refreshtable()
                 self.hint_login_information.setText('')
                 self.input_password.setText('')
                 self.updatepage_buyer(0)
@@ -247,25 +247,25 @@ class ItemView(QWidget):
             if extra[3] == 1 and self.hersteller.text() == 'Fendt':
                 layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[4] == 1 and self.hersteller.text() == 'Claas':
-                layoutextras.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[5] == 1 and self.hersteller.text() == 'John Deere':
-                layoutextras.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[6] == 1 and self.hersteller.text() == 'Steyr':
-                layoutextras.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[7] == 1 and self.hersteller.text() == 'Deutz':
-                layoutextras.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[10] == 1 and self.hersteller.text() == 'JCB':
-                layoutextras.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[9] == 1 and self.hersteller.text() == 'New Holland':
-                layoutextras.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[11] == 1 and self.hersteller.text() == 'Valtra':
-                layoutextras.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[8] == 1 and self.hersteller.text() == 'Kubota':
-                layoutextras.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[12] == 1 and self.hersteller.text() == 'Massey Ferguson':
-                layoutextras.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
             elif extra[13] == 1 and self.hersteller.text() == 'Lindner':
-                layoutextras.addWidget(QLabel(extra[0]))
+                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
         self.cart_button.deleteLater()
         screen.setCurrentIndex(2)
 
@@ -277,8 +277,8 @@ class ExtraItem(QWidget):
         self.stock.setText('Stock: ' + str(stock))
         self.price.setText('Price: ' + str(preis) + '€')
         self.name.setText(str(name))
-        # picture = QPixmap(f"./ui_files/product_images/{hersteller}_{typ}.jpg")
-        # self.picture.setPixmap(picture)
+        picture = QPixmap(f"./ui_files/extras_images/{name}.jpg")
+        self.picture.setPixmap(picture)
         # self.picture.mousePressEvent = lambda event: self.showimage(picture)
 
 
