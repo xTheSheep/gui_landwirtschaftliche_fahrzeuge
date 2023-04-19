@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1082</width>
-    <height>101</height>
+    <width>904</width>
+    <height>98</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -117,7 +117,7 @@
         </layout>
        </widget>
       </item>
-      <item alignment="Qt::AlignVCenter">
+      <item>
        <widget class="QFrame" name="frame_3">
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -128,10 +128,16 @@
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <widget class="QLabel" name="hersteller">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="font">
             <font>
-             <family>Bahnschrift SemiLight</family>
-             <pointsize>14</pointsize>
+             <family>Poppins</family>
+             <pointsize>15</pointsize>
             </font>
            </property>
            <property name="text">
@@ -144,9 +150,21 @@
          </item>
          <item>
           <widget class="QLabel" name="typ">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="font">
             <font>
-             <family>Bahnschrift SemiBold</family>
+             <family>Poppins SemiBold</family>
              <pointsize>16</pointsize>
             </font>
            </property>
@@ -161,7 +179,7 @@
         </layout>
        </widget>
       </item>
-      <item alignment="Qt::AlignVCenter">
+      <item>
        <widget class="QFrame" name="frame_4">
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -170,28 +188,18 @@
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
-         <item row="1" column="1">
-          <widget class="QLabel" name="ps">
-           <property name="font">
-            <font>
-             <family>Bahnschrift</family>
-             <pointsize>14</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>PS</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
           <widget class="QLabel" name="kmh">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="font">
             <font>
-             <family>Bahnschrift</family>
-             <pointsize>14</pointsize>
+             <family>Poppins Medium</family>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="text">
@@ -199,28 +207,6 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_3">
-           <property name="maximumSize">
-            <size>
-             <width>26</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap resource="agriculture-shop-ressources.qrc">:/icons/assets/icons/icons_png/speed_FILL0_wght400_GRAD0_opsz48.png</pixmap>
-           </property>
-           <property name="scaledContents">
-            <bool>true</bool>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -246,20 +232,8 @@
            </property>
           </widget>
          </item>
-        </layout>
-       </widget>
-      </item>
-      <item alignment="Qt::AlignVCenter">
-       <widget class="QFrame" name="frame_2">
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_3">
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_4">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_3">
            <property name="maximumSize">
             <size>
              <width>26</width>
@@ -270,7 +244,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="agriculture-shop-ressources.qrc">:/icons/assets/icons/icons_png/factory_FILL0_wght400_GRAD0_opsz48.png</pixmap>
+            <pixmap resource="agriculture-shop-ressources.qrc">:/icons/assets/icons/icons_png/speed_FILL0_wght400_GRAD0_opsz48.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -281,27 +255,51 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLabel" name="year">
+          <widget class="QLabel" name="ps">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="font">
             <font>
-             <family>Bahnschrift</family>
-             <pointsize>14</pointsize>
+             <family>Poppins Medium</family>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="text">
-            <string>Year</string>
+            <string>PS</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_2">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="1">
           <widget class="QLabel" name="preis">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="font">
             <font>
-             <family>Bahnschrift</family>
-             <pointsize>14</pointsize>
+             <family>Poppins Medium</family>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="text">
@@ -334,6 +332,51 @@
            </property>
           </widget>
          </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="year">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Poppins Medium</family>
+             <pointsize>13</pointsize>
+             <kerning>true</kerning>
+            </font>
+           </property>
+           <property name="text">
+            <string>Year</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_4">
+           <property name="maximumSize">
+            <size>
+             <width>26</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="agriculture-shop-ressources.qrc">:/icons/assets/icons/icons_png/factory_FILL0_wght400_GRAD0_opsz48.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
@@ -348,10 +391,16 @@
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
           <widget class="QLabel" name="stock">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="font">
             <font>
-             <family>Bahnschrift</family>
-             <pointsize>14</pointsize>
+             <family>Poppins</family>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="styleSheet">
@@ -365,8 +414,20 @@
            </property>
           </widget>
          </item>
-         <item>
+         <item alignment="Qt::AlignHCenter">
           <widget class="QPushButton" name="cart_button">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
            </property>

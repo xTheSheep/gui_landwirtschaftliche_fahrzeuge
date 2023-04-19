@@ -18,7 +18,9 @@
     <normaloff>:/icons/assets/icons/shopping_cart_checkout_FILL0_wght400_GRAD0_opsz48.svg</normaloff>:/icons/assets/icons/shopping_cart_checkout_FILL0_wght400_GRAD0_opsz48.svg</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QLabel {
+	color: #222;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -657,7 +659,7 @@ QPushButton:focus {
                 <widget class="QLabel" name="startpage_budget_label">
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
+                   <family>Source Sans Pro SemiBold</family>
                    <pointsize>14</pointsize>
                   </font>
                  </property>
@@ -702,14 +704,26 @@ QPushButton:focus {
                </item>
                <item>
                 <widget class="QLabel" name="welcome_label">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>50</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
+                   <family>Poppins Medium</family>
                    <pointsize>28</pointsize>
+                   <italic>false</italic>
+                   <underline>false</underline>
+                   <kerning>true</kerning>
                   </font>
                  </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: rgb(31, 31, 31);</string>
+                 </property>
                  <property name="text">
-                  <string>WELCOME BACK USER</string>
+                  <string>WELCOME USER</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
@@ -718,14 +732,42 @@ QPushButton:focus {
                </item>
                <item>
                 <widget class="QLabel" name="label_3">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>30</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
+                   <family>Poppins Light</family>
                    <pointsize>16</pointsize>
                   </font>
                  </property>
                  <property name="text">
-                  <string>This Webshop allows you to buy and configure only the best machines for agriculture!</string>
+                  <string>This Webshop allows you to buy and configure only</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Poppins Light</family>
+                   <pointsize>16</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>the best machines for agriculture!</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
@@ -758,8 +800,8 @@ QPushButton:focus {
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>150</width>
-                   <height>40</height>
+                   <width>170</width>
+                   <height>45</height>
                   </size>
                  </property>
                  <property name="maximumSize">
@@ -770,10 +812,10 @@ QPushButton:focus {
                  </property>
                  <property name="font">
                   <font>
-                   <family>Bahnschrift SemiBold</family>
+                   <family>Source Sans Pro SemiBold</family>
                    <pointsize>11</pointsize>
-                   <weight>75</weight>
-                   <bold>true</bold>
+                   <weight>50</weight>
+                   <bold>false</bold>
                   </font>
                  </property>
                  <property name="cursor">
@@ -783,7 +825,7 @@ QPushButton:focus {
                   <enum>Qt::TabFocus</enum>
                  </property>
                  <property name="text">
-                  <string>Start Shopping</string>
+                  <string>START SHOPPING</string>
                  </property>
                 </widget>
                </item>
@@ -865,7 +907,7 @@ QComboBox::down-arrow {
                 <widget class="QLabel" name="searchpage_budget_label">
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
+                   <family>Source Sans Pro SemiBold</family>
                    <pointsize>14</pointsize>
                   </font>
                  </property>
@@ -884,7 +926,7 @@ QComboBox::down-arrow {
                 <widget class="QLabel" name="header_search">
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
+                   <family>Source Sans Pro SemiBold</family>
                    <pointsize>20</pointsize>
                   </font>
                  </property>
@@ -926,33 +968,13 @@ QComboBox::down-arrow {
                   <property name="verticalSpacing">
                    <number>10</number>
                   </property>
-                  <item row="1" column="0">
-                   <widget class="QLineEdit" name="search_field_kmh_buyer">
+                  <item row="1" column="1">
+                   <widget class="QLineEdit" name="search_field_max_price_buyer">
                     <property name="text">
                      <string/>
                     </property>
                     <property name="placeholderText">
-                     <string>Km/h</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="2">
-                   <widget class="QLineEdit" name="search_field_year_buyer">
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>Year</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QLineEdit" name="search_field_ps_buyer">
-                    <property name="text">
-                     <string/>
-                    </property>
-                    <property name="placeholderText">
-                     <string>PS</string>
+                     <string>Max €</string>
                     </property>
                    </widget>
                   </item>
@@ -966,13 +988,13 @@ QComboBox::down-arrow {
                     </property>
                    </widget>
                   </item>
-                  <item row="1" column="1">
-                   <widget class="QLineEdit" name="search_field_max_price_buyer">
+                  <item row="0" column="2">
+                   <widget class="QLineEdit" name="search_field_year_buyer">
                     <property name="text">
                      <string/>
                     </property>
                     <property name="placeholderText">
-                     <string>Max €</string>
+                     <string>Year</string>
                     </property>
                    </widget>
                   </item>
@@ -1037,6 +1059,26 @@ QComboBox::down-arrow {
                     </item>
                    </widget>
                   </item>
+                  <item row="1" column="0">
+                   <widget class="QLineEdit" name="search_field_kmh_buyer">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="placeholderText">
+                     <string>Km/h</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLineEdit" name="search_field_ps_buyer">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="placeholderText">
+                     <string>PS</string>
+                    </property>
+                   </widget>
+                  </item>
                  </layout>
                 </widget>
                </item>
@@ -1065,7 +1107,7 @@ QComboBox::down-arrow {
                     </property>
                     <property name="font">
                      <font>
-                      <family>Bahnschrift</family>
+                      <family>Source Sans Pro</family>
                       <pointsize>12</pointsize>
                      </font>
                     </property>
@@ -1106,8 +1148,10 @@ QComboBox::down-arrow {
                     </property>
                     <property name="font">
                      <font>
-                      <family>Bahnschrift</family>
+                      <family>Source Sans Pro</family>
                       <pointsize>12</pointsize>
+                      <weight>50</weight>
+                      <bold>false</bold>
                      </font>
                     </property>
                     <property name="cursor">
@@ -1194,8 +1238,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>1078</width>
-                       <height>494</height>
+                       <width>57</width>
+                       <height>18</height>
                       </rect>
                      </property>
                      <property name="styleSheet">
@@ -1250,28 +1294,46 @@ QPushButton:focus {
                 <widget class="QLabel" name="label_2">
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
-                   <pointsize>18</pointsize>
+                   <family>Source Sans Pro SemiBold</family>
+                   <pointsize>21</pointsize>
+                   <weight>50</weight>
+                   <bold>false</bold>
                   </font>
                  </property>
                  <property name="text">
-                  <string>Configure Machine</string>
+                  <string>CONFIGURE MACHINE</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
                </item>
-               <item alignment="Qt::AlignLeft">
+               <item>
                 <widget class="QPushButton" name="pushButton_3">
+                 <property name="minimumSize">
+                  <size>
+                   <width>40</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>40</width>
+                   <height>40</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
+                   <family>Source Code Pro Black</family>
                    <pointsize>13</pointsize>
                   </font>
                  </property>
                  <property name="cursor">
                   <cursorShape>PointingHandCursor</cursorShape>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">border-radius: 20px;
+padding: 0;</string>
                  </property>
                  <property name="text">
                   <string>&lt;</string>
@@ -1305,7 +1367,29 @@ QPushButton:focus {
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <layout class="QVBoxLayout" name="configuration_layout_stockitem"/>
+                 <layout class="QVBoxLayout" name="configuration_layout_stockitem">
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                 </layout>
+                </widget>
+               </item>
+               <item alignment="Qt::AlignLeft">
+                <widget class="QFrame" name="frame_8">
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::NoFrame</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="configuration_layout_stockitem_details">
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                 </layout>
                 </widget>
                </item>
                <item>
@@ -1399,7 +1483,7 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                     <x>0</x>
                     <y>0</y>
                     <width>1096</width>
-                    <height>514</height>
+                    <height>492</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="configuration_layout">
@@ -1481,7 +1565,7 @@ QPushButton:focus {
                 <widget class="QLabel" name="header_cart_buyer">
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
+                   <family>Source Sans Pro SemiBold</family>
                    <pointsize>22</pointsize>
                   </font>
                  </property>
@@ -1512,8 +1596,8 @@ QPushButton:focus {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>100</width>
-                    <height>30</height>
+                    <width>65</width>
+                    <height>18</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="cart_buyer_layout"/>
@@ -1524,7 +1608,7 @@ QPushButton:focus {
                 <widget class="QLabel" name="label_sum_cart_buyer">
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
+                   <family>Source Sans Pro SemiBold</family>
                    <pointsize>18</pointsize>
                   </font>
                  </property>
@@ -1553,7 +1637,7 @@ QPushButton:focus {
                  <property name="font">
                   <font>
                    <family>Bahnschrift</family>
-                   <pointsize>12</pointsize>
+                   <pointsize>14</pointsize>
                   </font>
                  </property>
                  <property name="cursor">
@@ -1834,7 +1918,7 @@ QPushButton:hover{
            <item>
             <widget class="QStackedWidget" name="stackedWidget_mainapp_seller">
              <property name="currentIndex">
-              <number>1</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="page_home_seller">
               <property name="styleSheet">
@@ -1888,8 +1972,8 @@ QPushButton:focus {
                 <widget class="QLabel" name="welcome_label_username">
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
-                   <pointsize>28</pointsize>
+                   <family>Poppins</family>
+                   <pointsize>26</pointsize>
                   </font>
                  </property>
                  <property name="text">
@@ -1904,8 +1988,8 @@ QPushButton:focus {
                 <widget class="QLabel" name="welcome_label_budget">
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
-                   <pointsize>28</pointsize>
+                   <family>Poppins</family>
+                   <pointsize>18</pointsize>
                   </font>
                  </property>
                  <property name="text">
@@ -1954,8 +2038,8 @@ QPushButton:focus {
                  </property>
                  <property name="font">
                   <font>
-                   <family>Bahnschrift SemiBold</family>
-                   <pointsize>11</pointsize>
+                   <family>Source Sans Pro SemiBold</family>
+                   <pointsize>12</pointsize>
                    <weight>75</weight>
                    <bold>true</bold>
                   </font>
@@ -2052,8 +2136,8 @@ QComboBox::down-arrow {
                  </property>
                  <property name="font">
                   <font>
-                   <family>Bahnschrift</family>
-                   <pointsize>20</pointsize>
+                   <family>Source Sans Pro</family>
+                   <pointsize>22</pointsize>
                   </font>
                  </property>
                  <property name="text">
@@ -2313,8 +2397,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>1078</width>
-                       <height>520</height>
+                       <width>57</width>
+                       <height>18</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="layout_search_seller">

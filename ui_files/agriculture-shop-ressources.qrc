@@ -20,6 +20,7 @@
     <file>assets/icons/icons_png/icons_white/shopping_cart_checkout_white.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>assets/icons/icons_png/remove.png</file>
     <file>assets/icons/icons_png/arrow_drop_down_FILL0_wght400_GRAD0_opsz48.png</file>
     <file>assets/icons/icons_png/shelves_FILL0_wght400_GRAD0_opsz48.png</file>
     <file>assets/icons/icons_png/warehouse_FILL0_wght400_GRAD0_opsz48.png</file>

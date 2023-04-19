@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>980</width>
-    <height>98</height>
+    <height>78</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -43,7 +43,7 @@ QPushButton:pressed {
     background-color: rgba(0, 0, 0, 20); 
 }</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
     <number>9</number>
    </property>
@@ -81,8 +81,8 @@ QPushButton:pressed {
         </property>
         <property name="maximumSize">
          <size>
-          <width>120</width>
-          <height>80</height>
+          <width>100</width>
+          <height>60</height>
          </size>
         </property>
         <property name="text">
@@ -103,7 +103,7 @@ QPushButton:pressed {
        <widget class="QLabel" name="name">
         <property name="font">
          <font>
-          <family>Bahnschrift SemiBold</family>
+          <family>Source Sans Pro SemiBold</family>
           <pointsize>14</pointsize>
          </font>
         </property>
@@ -128,8 +128,8 @@ QPushButton:pressed {
           <widget class="QLabel" name="stock_pixmap">
            <property name="maximumSize">
             <size>
-             <width>35</width>
-             <height>35</height>
+             <width>25</width>
+             <height>25</height>
             </size>
            </property>
            <property name="font">
@@ -142,7 +142,7 @@ QPushButton:pressed {
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="agriculture-shop-ressources.qrc">:/icons/assets/icons/icons_png/warehouse_FILL0_wght400_GRAD0_opsz48.png</pixmap>
+            <pixmap resource="agriculture-shop-ressources.qrc">:/icons/assets/icons/icons_png/shelves_FILL0_wght400_GRAD0_opsz48.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -156,8 +156,8 @@ QPushButton:pressed {
           <widget class="QLabel" name="stock">
            <property name="font">
             <font>
-             <family>Bahnschrift</family>
-             <pointsize>13</pointsize>
+             <family>Source Sans Pro SemiBold</family>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="text">
@@ -175,8 +175,8 @@ QPushButton:pressed {
        <widget class="QLabel" name="price">
         <property name="font">
          <font>
-          <family>Bahnschrift</family>
-          <pointsize>13</pointsize>
+          <family>Source Sans Pro SemiBold</family>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -191,7 +191,7 @@ QPushButton:pressed {
        </widget>
       </item>
       <item alignment="Qt::AlignHCenter">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="add_addon_button">
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
