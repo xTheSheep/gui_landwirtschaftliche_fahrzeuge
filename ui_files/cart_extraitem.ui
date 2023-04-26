@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>cart_extra</class>
+ <widget class="QWidget" name="cart_extra">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>701</width>
+    <height>103</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLineEdit, QSpinBox {
+  color: rgba(0,0,0,.87);
+  padding: 20px 16px 6px;
+  background: #ececec;
+  border: none;
+  border-radius: 4px;
+  border-bottom: 1px solid rgba(0,0,0,.42);
+  border-radius: 0 0 0 0;
+  font-size: 15px;
+  height: 20px;
+}
+
+QSpinBox:editable {
+    background-color: #ececec;
+    border: 1px solid #999; 
+    border-radius: 4px; 
+    padding: 6px;
+}
+
+QSpinBox {
+	color: grey;
+}
+
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="name">
+        <property name="font">
+         <font>
+          <family>Source Sans Pro SemiBold</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="price">
+        <property name="font">
+         <font>
+          <family>Source Sans Pro SemiBold</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QSpinBox" name="anzahlbox">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="agriculture-shop-ressources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

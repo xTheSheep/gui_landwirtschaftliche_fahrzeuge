@@ -6,6 +6,7 @@
     <file>assets/Logo.png</file>
   </qresource>
   <qresource prefix="icons_white">
+    <file>assets/icons/icons_png/icons_white/add_white.png</file>
     <file>assets/icons/icons_png/icons_white/agriculture_white.png</file>
     <file>assets/icons/icons_png/icons_white/badge_white.png</file>
     <file>assets/icons/icons_png/icons_white/factory_white.png</file>

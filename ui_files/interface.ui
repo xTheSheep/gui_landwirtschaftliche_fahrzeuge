@@ -23,7 +23,7 @@
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_10">
+   <layout class="QGridLayout" name="gridLayout_2">
     <property name="leftMargin">
      <number>0</number>
     </property>
@@ -36,7 +36,7 @@
     <property name="bottomMargin">
      <number>0</number>
     </property>
-    <item>
+    <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="cursor">
        <cursorShape>ArrowCursor</cursorShape>
@@ -633,7 +633,7 @@ QPushButton:hover{
            <item>
             <widget class="QStackedWidget" name="stackedWidget_mainapp">
              <property name="currentIndex">
-              <number>2</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="page_home">
               <property name="styleSheet">
@@ -1238,8 +1238,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>57</width>
-                       <height>18</height>
+                       <width>1078</width>
+                       <height>484</height>
                       </rect>
                      </property>
                      <property name="styleSheet">
@@ -1248,9 +1248,6 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
 }</string>
                      </property>
                      <layout class="QVBoxLayout" name="layout_search_buyer">
-                      <property name="spacing">
-                       <number>10</number>
-                      </property>
                       <property name="leftMargin">
                        <number>9</number>
                       </property>
@@ -1392,6 +1389,24 @@ padding: 0;</string>
                  </layout>
                 </widget>
                </item>
+               <item alignment="Qt::AlignLeft">
+                <widget class="QFrame" name="frame_9">
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::NoFrame</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="configuration_layout_stockitem_details_2">
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                 </layout>
+                </widget>
+               </item>
                <item>
                 <widget class="QWidget" name="widget_2" native="true">
                  <property name="sizePolicy">
@@ -1483,19 +1498,15 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                     <x>0</x>
                     <y>0</y>
                     <width>1096</width>
-                    <height>492</height>
+                    <height>477</height>
                    </rect>
                   </property>
-                  <layout class="QVBoxLayout" name="configuration_layout">
-                   <property name="spacing">
-                    <number>3</number>
-                   </property>
-                  </layout>
+                  <layout class="QGridLayout" name="configuration_layout"/>
                  </widget>
                 </widget>
                </item>
                <item alignment="Qt::AlignRight">
-                <widget class="QPushButton" name="pushButton_5">
+                <widget class="QPushButton" name="addtocart_button">
                  <property name="minimumSize">
                   <size>
                    <width>150</width>
@@ -1596,8 +1607,8 @@ QPushButton:focus {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>65</width>
-                    <height>18</height>
+                    <width>1096</width>
+                    <height>638</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="cart_buyer_layout"/>

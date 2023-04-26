@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget, QLabel
 from PyQt5.QtGui import QDoubleValidator, QPixmap, QPainter, QCursor, QIcon
 
 
-# workflow: warenkorb, verkäufer, budgetverwaltung, hotkeys (esc etc)
+# workflow: warenkorb, verkäufer, budgetverwaltung, hotkeys (esc etc), zweite reihe configuration
 
 
 # screens
@@ -25,6 +25,7 @@ class Startscreen(QMainWindow):
         self.searchitem_button.clicked.connect(self.refreshtable)
         self.searchitem_button_seller.clicked.connect(self.refreshtable)
         self.clear_button_buyer.clicked.connect(self.clearsearchfields)
+        self.addtocart_button.clicked.connect(self.addtocart)
         # add validators to search fields
         self.search_field_ps_buyer.setValidator(QDoubleValidator(1, 10000000000, 0))
         self.search_field_kmh_buyer.setValidator(QDoubleValidator(1, 10000000000, 0))
@@ -100,7 +101,9 @@ class Startscreen(QMainWindow):
             temp2 = ItemView(product[0], product[1], product[2], product[3], product[4], product[5], product[6])
             self.layout_search_buyer.addWidget(temp)
             self.layout_search_seller.addWidget(temp2)
-            temp.addtochart(self.configuration_layout_stockitem, self.configuration_layout_stockitem_details, self.configuration_layout, self.stackedWidget_mainapp)
+            temp.addtochart(self.configuration_layout_stockitem, self.configuration_layout_stockitem_details,
+                            self.configuration_layout_stockitem_details_2, self.configuration_layout,
+                            self.stackedWidget_mainapp)
 
     def clearsearchfields(self):
         self.search_field_ps_buyer.setText('')
@@ -121,6 +124,19 @@ class Startscreen(QMainWindow):
 
     def updatepage_seller(self, number):
         self.stackedWidget_mainapp_seller.setCurrentIndex(number)
+
+    def addtocart(self):
+        if self.configuration_layout_stockitem.count() != 0:
+            self.configuration_layout_stockitem.itemAt(0).widget().stock.deleteLater()
+            self.cart_buyer_layout.addWidget(self.configuration_layout_stockitem.itemAt(0).widget(),
+                                             alignment=Qt.AlignTop)
+        for i in reversed(range(self.configuration_layout_stockitem_details.count())):
+            temp = self.configuration_layout_stockitem_details.itemAt(i).widget()
+            self.cart_buyer_layout.addWidget(ExtraItemCart(temp.chiplabel.text(), temp.price, temp.stock))
+        for i in reversed(range(self.configuration_layout_stockitem_details_2.count())):
+            temp = self.cart_buyer_layout.addWidget(self.configuration_layout_stockitem_details_2.itemAt(i).widget())
+            self.cart_buyer_layout.addWidget(ExtraItemCart(temp.chiplabel.text(), temp.price, temp.stock))
+        self.updatepage_buyer(3)
 
     def login(self):
         user = self.input_username.text()
@@ -231,14 +247,18 @@ class ItemView(QWidget):
         preview.show()
         preview.set_pixmap(event)
 
-    def addtochart(self, layoutitem, layoutdetails, layoutextras, screen):
-        self.cart_button.clicked.connect(lambda: self.addselftochart(layoutitem, layoutdetails, layoutextras, screen))
+    def addtochart(self, layoutitem, layoutdetails, layoutdetails2, layoutextras, screen):
+        self.cart_button.clicked.connect(lambda: self.addselftochart(layoutitem, layoutdetails, layoutdetails2, layoutextras, screen))
 
-    def addselftochart(self, layoutitem, layoutdetails, layoutextras,  screen):
+    def addselftochart(self, layoutitem, layoutdetails, layoutdetails2, layoutextras,  screen):
         for i in reversed(range(layoutitem.count())):
             layoutitem.itemAt(i).widget().deleteLater()
         for i in reversed(range(layoutextras.count())):
             layoutextras.itemAt(i).widget().deleteLater()
+        for i in reversed(range(layoutdetails.count())):
+            layoutdetails.itemAt(i).widget().deleteLater()
+        for i in reversed(range(layoutdetails2.count())):
+            layoutdetails2.itemAt(i).widget().deleteLater()
 
         layoutitem.addWidget(self)
         db = sqlite3.connect("db.db")
@@ -246,33 +266,48 @@ class ItemView(QWidget):
         query = 'SELECT * FROM zusatzgeraete'
         cursor.execute(query)
         result = cursor.fetchall()
-        print(result)
+        n = -1
         for extra in result:
+            temp = None
             if extra[3] == 1 and self.hersteller.text() == 'Fendt':
                 temp = ExtraItem(extra[0], extra[1], extra[2])
-                temp.addtolayout(layoutdetails)
-                layoutextras.addWidget(temp)
+                n += 1
             elif extra[4] == 1 and self.hersteller.text() == 'Claas':
-                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
+                temp = ExtraItem(extra[0], extra[1], extra[2])
+                n += 1
             elif extra[5] == 1 and self.hersteller.text() == 'John Deere':
-                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
+                temp = ExtraItem(extra[0], extra[1], extra[2])
+                n += 1
             elif extra[6] == 1 and self.hersteller.text() == 'Steyr':
-                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
+                temp = ExtraItem(extra[0], extra[1], extra[2])
+                n += 1
             elif extra[7] == 1 and self.hersteller.text() == 'Deutz':
-                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
+                temp = ExtraItem(extra[0], extra[1], extra[2])
+                n += 1
             elif extra[10] == 1 and self.hersteller.text() == 'JCB':
-                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
+                temp = ExtraItem(extra[0], extra[1], extra[2])
+                n += 1
             elif extra[9] == 1 and self.hersteller.text() == 'New Holland':
-                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
+                temp = ExtraItem(extra[0], extra[1], extra[2])
+                n += 1
             elif extra[11] == 1 and self.hersteller.text() == 'Valtra':
-                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
+                temp = ExtraItem(extra[0], extra[1], extra[2])
+                n += 1
             elif extra[8] == 1 and self.hersteller.text() == 'Kubota':
-                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
+                temp = ExtraItem(extra[0], extra[1], extra[2])
+                n += 1
             elif extra[12] == 1 and self.hersteller.text() == 'Massey Ferguson':
-                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
+                temp = ExtraItem(extra[0], extra[1], extra[2])
+                n += 1
             elif extra[13] == 1 and self.hersteller.text() == 'Lindner':
-                layoutextras.addWidget(ExtraItem(extra[0], extra[1], extra[2]))
+                temp = ExtraItem(extra[0], extra[1], extra[2])
+                n += 1
+            if temp is not None:
+                temp.addtolayout(layoutdetails, layoutdetails2)
+                layoutextras.addWidget(temp, n / 2, n % 2)
+
         self.cart_button.deleteLater()
+
         screen.setCurrentIndex(2)
 
 
@@ -291,10 +326,10 @@ class ExtraItem(QWidget):
         preview.show()
         preview.set_pixmap(event)
 
-    def addtolayout(self, layout):
-        self.add_addon_button.clicked.connect(lambda: self.addselftolayout(layout))
+    def addtolayout(self, layout, layout2):
+        self.add_addon_button.clicked.connect(lambda: self.addselftolayout(layout, layout2))
 
-    def addselftolayout(self, layout):
+    def addselftolayout(self, layout, layout2):
 
         itemisinlayout = False
 
@@ -304,20 +339,31 @@ class ExtraItem(QWidget):
                 layout.itemAt(i).widget().deleteLater()
                 itemisinlayout = True
 
+        for i in reversed(range(layout2.count())):
+            if layout2.itemAt(i).widget().text() == self.name.text():
+                self.add_addon_button.setIcon(QIcon(QPixmap("./ui_files/assets/icons/icons_png/add_FILL0_wght400_GRAD0_opsz48.png")))
+                layout2.itemAt(i).widget().deleteLater()
+                itemisinlayout = True
+
         if not itemisinlayout:
             self.add_addon_button.setIcon(QIcon(QPixmap("./ui_files/assets/icons/icons_png/remove.png")))
-            layout.addWidget(Addondetails(self.name.text()))
-
+            if layout.count() < 7:
+                layout.addWidget(Addondetails(self.name.text(), self.stock.text(), self.price.text()))
+            else:
+                layout2.addWidget(Addondetails(self.name.text()))
 
 
 class Addondetails(QWidget):
-    def __init__(self, name='name'):
+    def __init__(self, name='name', stock=1, price=0):
         super(Addondetails, self).__init__()
         loadUi("./ui_files/addon.ui", self)
         self.chiplabel.setText(str(name))
+        self.stock = str(stock)
+        self.price = str(price)
 
     def text(self):
         return self.chiplabel.text()
+
 
 class ZoomablePixmapWidget(QLabel):
     def __init__(self, pixmap):
@@ -362,6 +408,16 @@ class ZoomablePixmapWidget(QLabel):
         if event.button() == Qt.LeftButton:
             self.pan_start = QPoint()
             self.setCursor(QCursor(Qt.ArrowCursor))
+
+class ExtraItemCart(QWidget):
+    def __init__(self, name='name', preis='preis', anzahl=1):
+        super(ExtraItemCart, self).__init__()
+        loadUi("./ui_files/cart_extraitem.ui", self)
+        self.price.setText(str(preis))
+        self.name.setText(str(name))
+        self.anzahlbox.setMaximum(int(anzahl[7:]))
+
+
 
 
 # main
