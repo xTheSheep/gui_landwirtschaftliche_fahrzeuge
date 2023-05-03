@@ -18,6 +18,7 @@ class Startscreen(QMainWindow):
         # set session data
         self.user = ''
         self.budget = 0
+        self.cartsum = 0
         # set initial session values
         self.stackedWidget.setCurrentIndex(0)
         self.pushButton_4.clicked.connect(self.login)
@@ -26,6 +27,8 @@ class Startscreen(QMainWindow):
         self.searchitem_button_seller.clicked.connect(self.refreshtable)
         self.clear_button_buyer.clicked.connect(self.clearsearchfields)
         self.addtocart_button.clicked.connect(self.addtocart)
+        self.checkout_button_buyer.clicked.connect(self.buyproducts)
+        self.clear_cart_button_buyer.clicked.connect(self.clearcart)
         # add validators to search fields
         self.search_field_ps_buyer.setValidator(QDoubleValidator(1, 10000000000, 0))
         self.search_field_kmh_buyer.setValidator(QDoubleValidator(1, 10000000000, 0))
@@ -119,6 +122,42 @@ class Startscreen(QMainWindow):
             self.layout_search_buyer.itemAt(i).widget().deleteLater()
             self.layout_search_seller.itemAt(i).widget().deleteLater()
 
+    def clearcart(self):
+        for i in reversed(range(self.cart_buyer_layout.count())):
+            self.cart_buyer_layout.itemAt(i).widget().deleteLater()
+        self.label_totalprice.setText("-Total Price: 0 €")
+        self.label_sum_cart_buyer.setText(f"Budget after Checkout: {int(self.budget)} €")
+        self.checkout_button_buyer.setEnabled(False)
+
+    def buyproducts(self):
+        self.budget -= self.cartsum
+        self.setuservalues()
+        db = sqlite3.connect("db.db")
+        cursor = db.cursor()
+        query1 = 'SELECT budget FROM users WHERE username = "Klaus"'
+        query2 = 'UPDATE users SET budget = ? WHERE username = ?'
+        query3 = 'UPDATE bestand SET bestand = ? WHERE typ = ?'
+        query4 = 'UPDATE zusatzgeraete SET bestand = ? WHERE geraet = ?'
+        cursor.execute(query1)
+        budget_seller = cursor.fetchone()[0]
+        cursor.execute(query2, (self.budget, self.user))
+        cursor.execute(query2, (self.cartsum + budget_seller, 'Klaus'))
+        for i in reversed(range(self.cart_buyer_layout.count())):
+            if int(self.cart_buyer_layout.itemAt(i).widget().price.text().split(' ')[1][:-1]) < 4700:
+                self.cart_buyer_layout.itemAt(i).widget().stock -= int(self.cart_buyer_layout.itemAt(i).widget().anzahlbox.value())
+                cursor.execute(query4, (self.cart_buyer_layout.itemAt(i).widget().stock, self.cart_buyer_layout.itemAt(i).widget().name.text()))
+            else:
+                self.cart_buyer_layout.itemAt(i).widget().instock -= 1
+                cursor.execute(query3, (self.cart_buyer_layout.itemAt(i).widget().instock, self.cart_buyer_layout.itemAt(i).widget().typ.text()))
+        db.commit()
+        db.close()
+        for i in reversed(range(self.cart_buyer_layout.count())):
+            self.cart_buyer_layout.itemAt(i).widget().deleteLater()
+        self.updatepage_buyer(0)
+        self.label_totalprice.setText("-Total Price: 0 €")
+        self.label_sum_cart_buyer.setText(f"Budget after Checkout: {int(self.budget)} €")
+        self.checkout_button_buyer.setEnabled(False)
+
     def updatepage_buyer(self, number):
         self.stackedWidget_mainapp.setCurrentIndex(number)
 
@@ -134,9 +173,31 @@ class Startscreen(QMainWindow):
             temp = self.configuration_layout_stockitem_details.itemAt(i).widget()
             self.cart_buyer_layout.addWidget(ExtraItemCart(temp.chiplabel.text(), temp.price, temp.stock))
         for i in reversed(range(self.configuration_layout_stockitem_details_2.count())):
-            temp = self.cart_buyer_layout.addWidget(self.configuration_layout_stockitem_details_2.itemAt(i).widget())
+            temp = self.configuration_layout_stockitem_details_2.itemAt(i).widget()
             self.cart_buyer_layout.addWidget(ExtraItemCart(temp.chiplabel.text(), temp.price, temp.stock))
+        for i in reversed(range(self.cart_buyer_layout.count())):
+            try:
+                self.cart_buyer_layout.itemAt(i).widget().anzahlbox.textChanged.connect(self.calculate_price)
+            except:
+                pass
+
+        self.calculate_price()
         self.updatepage_buyer(3)
+
+    def calculate_price(self):
+        sum = 0
+        for i in reversed(range(self.cart_buyer_layout.count())):
+            if int(self.cart_buyer_layout.itemAt(i).widget().price.text().split(' ')[1][:-1]) < 4700:
+                sum += int(self.cart_buyer_layout.itemAt(i).widget().price.text().split(' ')[1][:-1]) * int(self.cart_buyer_layout.itemAt(i).widget().anzahlbox.value())
+            else:
+                sum += int(self.cart_buyer_layout.itemAt(i).widget().price.text().split(' ')[1][:-1])
+        self.label_totalprice.setText(f"-Total Price: {sum} €")
+        self.label_sum_cart_buyer.setText(f"Budget after Checkout: {int(self.budget-sum)} €")
+        self.cartsum = sum
+        if int(self.budget-sum) < 0:
+            self.checkout_button_buyer.setEnabled(False)
+        else:
+            self.checkout_button_buyer.setEnabled(True)
 
     def login(self):
         user = self.input_username.text()
@@ -187,6 +248,7 @@ class Startscreen(QMainWindow):
         self.searchpage_budget_label.setText(f'Budget {int(self.budget)} €')
         self.welcome_label_username.setText(f'welcome {self.user}'.upper())
         self.welcome_label_budget.setText(f'your current budget is {int(self.budget)}€'.upper())
+        self.label_cart_budget.setText(f'Current Money: {int(self.budget)}€')
 
 
 class CreateAccountDialog(QDialog):
@@ -226,15 +288,16 @@ class CreateAccountDialog(QDialog):
 
 
 class ItemView(QWidget):
-    def __init__(self, hersteller='hersteller', typ='typ', ps='ps', kmh='kmh', preis='preis', baujahr='baujahr', stock='stock'):
+    def __init__(self, hersteller='hersteller', typ='typ', ps='ps', kmh='kmh', price='preis', baujahr='baujahr', stock='stock'):
         super(ItemView, self).__init__()
         loadUi("./ui_files/stockitem.ui", self)
+        self.instock = stock
         self.typ.setText(str(typ))
         self.hersteller.setText(str(hersteller))
         self.year.setText('Year:' + str(baujahr))
         self.ps.setText(str(ps) + 'PS')
         self.kmh.setText(str(kmh) + 'km/h')
-        self.preis.setText('Price: ' + str(preis) + '€')
+        self.price.setText('Price: ' + str(price) + '€')
         self.stock.setText('Stock: ' + str(stock))
         picture = QPixmap(f"./ui_files/product_images/{hersteller}_{typ}.jpg")
         self.picture.setPixmap(picture)
@@ -312,11 +375,11 @@ class ItemView(QWidget):
 
 
 class ExtraItem(QWidget):
-    def __init__(self, name='name', preis='preis', stock='stock'):
+    def __init__(self, name='name', price='preis', stock='stock'):
         super(ExtraItem, self).__init__()
         loadUi("./ui_files/extra_item.ui", self)
         self.stock.setText('Stock: ' + str(stock))
-        self.price.setText('Price: ' + str(preis) + '€')
+        self.price.setText('Price: ' + str(price) + '€')
         self.name.setText(str(name))
         picture = QPixmap(f"./ui_files/extras_images/{name}.jpg")
         self.picture.setPixmap(picture)
@@ -350,7 +413,7 @@ class ExtraItem(QWidget):
             if layout.count() < 7:
                 layout.addWidget(Addondetails(self.name.text(), self.stock.text(), self.price.text()))
             else:
-                layout2.addWidget(Addondetails(self.name.text()))
+                layout2.addWidget(Addondetails(self.name.text(), self.stock.text(), self.price.text()))
 
 
 class Addondetails(QWidget):
@@ -410,12 +473,13 @@ class ZoomablePixmapWidget(QLabel):
             self.setCursor(QCursor(Qt.ArrowCursor))
 
 class ExtraItemCart(QWidget):
-    def __init__(self, name='name', preis='preis', anzahl=1):
+    def __init__(self, name='name', price='preis', anzahl=1):
         super(ExtraItemCart, self).__init__()
         loadUi("./ui_files/cart_extraitem.ui", self)
-        self.price.setText(str(preis))
+        self.price.setText(str(price))
         self.name.setText(str(name))
         self.anzahlbox.setMaximum(int(anzahl[7:]))
+        self.stock = int(anzahl[7:])
 
 
 
