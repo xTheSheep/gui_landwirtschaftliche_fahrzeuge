@@ -42,7 +42,7 @@
        <cursorShape>ArrowCursor</cursorShape>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="login_page">
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1238,8 +1238,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>1078</width>
-                       <height>500</height>
+                       <width>57</width>
+                       <height>18</height>
                       </rect>
                      </property>
                      <property name="styleSheet">
@@ -1497,8 +1497,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1096</width>
-                    <height>493</height>
+                    <width>75</width>
+                    <height>18</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="configuration_layout"/>
@@ -2879,8 +2879,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>1072</width>
-                           <height>498</height>
+                           <width>100</width>
+                           <height>30</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="layout_search_seller">
@@ -2989,8 +2989,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>1072</width>
-                           <height>498</height>
+                           <width>100</width>
+                           <height>30</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="layout_search_seller_extra">
@@ -3127,7 +3127,7 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>778</width>
+                       <width>768</width>
                        <height>780</height>
                       </rect>
                      </property>
@@ -3149,6 +3149,13 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                   </item>
                   <item>
                    <widget class="QFrame" name="frame_16">
+                    <property name="styleSheet">
+                     <string notr="true">#frame_16 {
+	background-color: rgba(0, 0, 0, 10);
+	border-radius: 40px;
+	padding: 5px;
+}</string>
+                    </property>
                     <property name="frameShape">
                      <enum>QFrame::NoFrame</enum>
                     </property>
@@ -3156,6 +3163,33 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                      <enum>QFrame::Raised</enum>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_21">
+                     <item>
+                      <widget class="QLabel" name="label_cart_budget_seller_2">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>60</height>
+                        </size>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Source Sans Pro Black</family>
+                         <pointsize>20</pointsize>
+                         <weight>50</weight>
+                         <bold>false</bold>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="text">
+                        <string>Your Purchase:</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
                      <item>
                       <widget class="QLabel" name="label_cart_budget_seller">
                        <property name="maximumSize">
@@ -3170,18 +3204,14 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                          <pointsize>18</pointsize>
                         </font>
                        </property>
+                       <property name="styleSheet">
+                        <string notr="true">color: green;</string>
+                       </property>
                        <property name="text">
                         <string>Current Money: €€€</string>
                        </property>
                        <property name="alignment">
-                        <set>Qt::AlignCenter</set>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="Line" name="line">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
+                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                        </property>
                       </widget>
                      </item>
@@ -3203,8 +3233,95 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                         <string>- Total Price: €€€</string>
                        </property>
                        <property name="alignment">
-                        <set>Qt::AlignCenter</set>
+                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                        </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="Line" name="line">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_18">
+                       <property name="styleSheet">
+                        <string notr="true">#frame_18 {
+	padding: 5px;
+	border-radius: 20px;
+	background: rgba(0, 0, 0, 10);
+}
+</string>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::NoFrame</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_13">
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
+                        <item>
+                         <widget class="QLabel" name="label_7">
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="pixmap">
+                           <pixmap resource="agriculture-shop-ressources.qrc">:/pictures/assets/icons/icons_png/point_of_sale_FILL0_wght400_GRAD0_opsz48.png</pixmap>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignCenter</set>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="label_sum_cart_seller_3">
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>60</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Source Sans Pro SemiBold</family>
+                            <pointsize>18</pointsize>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>Budget after:</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignCenter</set>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="label_sum_cart_seller">
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>60</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Source Sans Pro SemiBold</family>
+                            <pointsize>18</pointsize>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>€€€</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignCenter</set>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </widget>
                      </item>
                      <item>
@@ -3235,28 +3352,6 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                         </size>
                        </property>
                       </spacer>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="label_sum_cart_seller">
-                       <property name="maximumSize">
-                        <size>
-                         <width>16777215</width>
-                         <height>60</height>
-                        </size>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <family>Source Sans Pro SemiBold</family>
-                         <pointsize>18</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>Budget after Checkout:</string>
-                       </property>
-                       <property name="alignment">
-                        <set>Qt::AlignCenter</set>
-                       </property>
-                      </widget>
                      </item>
                      <item alignment="Qt::AlignHCenter">
                       <widget class="QPushButton" name="checkout_button_seller">
