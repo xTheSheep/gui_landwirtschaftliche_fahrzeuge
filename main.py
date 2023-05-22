@@ -1,5 +1,7 @@
 import sys
 import sqlite3
+from time import sleep
+
 from PyQt5.QtCore import QPoint, Qt
 from ui_files import ressources_interface
 from PyQt5.uic import loadUi
@@ -7,7 +9,7 @@ from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget, QLabel
 from PyQt5.QtGui import QDoubleValidator, QPixmap, QPainter, QCursor, QIcon
 
 
-# workflow: warenkorb, verkäufer, budgetverwaltung, hotkeys (esc etc), zweite reihe configuration
+# workflow: verkäufer, hotkeys (esc etc)
 
 
 # screens
@@ -28,6 +30,7 @@ class Startscreen(QMainWindow):
         self.clear_button_buyer.clicked.connect(self.clearsearchfields)
         self.addtocart_button.clicked.connect(self.addtocart)
         self.checkout_button_buyer.clicked.connect(self.buyproducts)
+        self.checkout_button_seller.clicked.connect(self.sellproducts)
         self.clear_cart_button_buyer.clicked.connect(self.clearcart)
         # add validators to search fields
         self.search_field_ps_buyer.setValidator(QDoubleValidator(1, 10000000000, 0))
@@ -43,6 +46,7 @@ class Startscreen(QMainWindow):
         # setup buttons sidebar seller
         self.home_button_seller.clicked.connect(lambda: self.updatepage_seller(0))
         self.search_button_seller.clicked.connect(lambda: self.updatepage_seller(1))
+        self.cart_button_seller.clicked.connect(lambda: self.updatepage_seller(2))
         self.logout_button_seller.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
 
     def refreshtable(self):
@@ -55,7 +59,7 @@ class Startscreen(QMainWindow):
         search_results = result.copy()
 
         for product in result:
-            if product[6] == 0 and self.isseller():
+            if product[6] == 0 and self.isbuyer():
                 search_results.remove(product)
                 continue
             if self.search_field_ps_buyer.text() != '':
@@ -79,7 +83,24 @@ class Startscreen(QMainWindow):
                     search_results.remove(product)
                     continue
 
-        if self.sort_field_buyer.currentIndex() != 0 or not self.isseller():
+        if not self.isbuyer():
+            query = 'SELECT * FROM zusatzgeraete'
+            cursor.execute(query)
+            result = cursor.fetchall()
+            descending = True
+            if self.sortbox_seller.currentIndex() == 0:
+                index = 2
+                descending = False
+            elif self.sortbox_seller.currentIndex() == 1:
+                index = 2
+            elif self.sortbox_seller.currentIndex() == 2:
+                index = 1
+                descending = False
+            elif self.sortbox_seller.currentIndex() == 3:
+                index = 1
+            result.sort(reverse=descending, key=lambda x: x[index])
+
+        if self.sort_field_buyer.currentIndex() != 0 or not self.isbuyer():
             descending = True
             if self.sort_field_buyer.currentIndex() == 1:
                 index = 2
@@ -92,21 +113,26 @@ class Startscreen(QMainWindow):
                 index = 4
             elif self.sort_field_buyer.currentIndex() == 5:
                 index = 5
-            elif self.sortbox_seller.currentIndex() == 0:
+            elif self.sortbox_seller.currentIndex() == 0 and not self.isbuyer():
                 index = 6
                 descending = False
-            elif self.sortbox_seller.currentIndex() == 1 and not self.isseller():
+            elif self.sortbox_seller.currentIndex() == 1:
                 index = 6
             search_results.sort(reverse=descending, key=lambda x: x[index])
 
         for product in search_results:
             temp = ItemView(product[0], product[1], product[2], product[3], product[4], product[5], product[6])
-            temp2 = ItemView(product[0], product[1], product[2], product[3], product[4], product[5], product[6])
+            temp2 = SellerItem(product[0] + "_" + product[1], product[4], product[6])
+            temp2.addtocart(self.cart_layout_seller, self.calculate_price_seller, self.layout_search_seller)
             self.layout_search_buyer.addWidget(temp)
             self.layout_search_seller.addWidget(temp2)
-            temp.addtochart(self.configuration_layout_stockitem, self.configuration_layout_stockitem_details,
+            temp.addtocart(self.configuration_layout_stockitem, self.configuration_layout_stockitem_details,
                             self.configuration_layout_stockitem_details_2, self.configuration_layout,
                             self.stackedWidget_mainapp)
+        for extra in result:
+            temp = SellerItem(extra[0], extra[1], extra[2], True)
+            temp.addtocart(self.cart_layout_seller, self.calculate_price_seller, self.layout_search_seller)
+            self.layout_search_seller_extra.addWidget(temp)
 
     def clearsearchfields(self):
         self.search_field_ps_buyer.setText('')
@@ -120,13 +146,16 @@ class Startscreen(QMainWindow):
     def clearlayout(self):
         for i in reversed(range(self.layout_search_buyer.count())):
             self.layout_search_buyer.itemAt(i).widget().deleteLater()
+        for i in reversed(range(self.layout_search_seller.count())):
             self.layout_search_seller.itemAt(i).widget().deleteLater()
+        for i in reversed(range(self.layout_search_seller_extra.count())):
+            self.layout_search_seller_extra.itemAt(i).widget().deleteLater()
 
     def clearcart(self):
         for i in reversed(range(self.cart_buyer_layout.count())):
             self.cart_buyer_layout.itemAt(i).widget().deleteLater()
         self.label_totalprice.setText("-Total Price: 0 €")
-        self.label_sum_cart_buyer.setText(f"Budget after Checkout: {int(self.budget)} €")
+        self.label_sum_cart_buyer.setText(f"{int(self.budget)} €")
         self.checkout_button_buyer.setEnabled(False)
 
     def buyproducts(self):
@@ -153,15 +182,43 @@ class Startscreen(QMainWindow):
         db.close()
         for i in reversed(range(self.cart_buyer_layout.count())):
             self.cart_buyer_layout.itemAt(i).widget().deleteLater()
-        self.updatepage_buyer(0)
+        self.updatepage_buyer(4)
         self.label_totalprice.setText("-Total Price: 0 €")
-        self.label_sum_cart_buyer.setText(f"Budget after Checkout: {int(self.budget)} €")
+        self.label_sum_cart_buyer.setText(f"{int(self.budget)} €")
         self.checkout_button_buyer.setEnabled(False)
+
+    def sellproducts(self):
+        self.budget -= self.calculate_price_seller()
+        self.setuservalues()
+        db = sqlite3.connect("db.db")
+        cursor = db.cursor()
+        query1 = 'UPDATE users SET budget = ? WHERE username = ?'
+        query2 = 'UPDATE bestand SET bestand = ? WHERE typ = ?'
+        query3 = 'UPDATE zusatzgeraete SET bestand = ? WHERE geraet = ?'
+        cursor.execute(query1, (self.budget, 'Klaus'))
+        for i in reversed(range(self.cart_layout_seller.count())):
+            self.cart_layout_seller.itemAt(i).widget().instock += int(self.cart_layout_seller.itemAt(i).widget().stocknumber_box.value())
+            if int(self.cart_layout_seller.itemAt(i).widget().price.text().split(' ')[1][:-1]) < 4700:
+                cursor.execute(query3, (self.cart_layout_seller.itemAt(i).widget().instock, self.cart_layout_seller.itemAt(i).widget().name.text()))
+            else:
+                cursor.execute(query2, (self.cart_layout_seller.itemAt(i).widget().instock, self.cart_layout_seller.itemAt(i).widget().name.text().split('_', 1)[1]))
+        db.commit()
+        db.close()
+        for i in reversed(range(self.cart_layout_seller.count())):
+            self.cart_layout_seller.itemAt(i).widget().deleteLater()
+        self.label_totalprice_seller.setText("-Total Price: 0 €")
+        self.label_sum_cart_seller.setText(f"{int(self.budget)} €")
+        self.checkout_button_seller.setEnabled(False)
+
 
     def updatepage_buyer(self, number):
         self.stackedWidget_mainapp.setCurrentIndex(number)
 
     def updatepage_seller(self, number):
+        if number == 2:
+            self.calculate_price_seller()
+            for i in reversed(range(self.cart_layout_seller.count())):
+                self.cart_layout_seller.itemAt(i).widget().stocknumber_box.textChanged.connect(self.calculate_price_seller)
         self.stackedWidget_mainapp_seller.setCurrentIndex(number)
 
     def addtocart(self):
@@ -192,12 +249,25 @@ class Startscreen(QMainWindow):
             else:
                 sum += int(self.cart_buyer_layout.itemAt(i).widget().price.text().split(' ')[1][:-1])
         self.label_totalprice.setText(f"-Total Price: {sum} €")
-        self.label_sum_cart_buyer.setText(f"Budget after Checkout: {int(self.budget-sum)} €")
+        self.label_sum_cart_buyer.setText(f"{int(self.budget-sum)} €")
         self.cartsum = sum
         if int(self.budget-sum) < 0:
             self.checkout_button_buyer.setEnabled(False)
         else:
             self.checkout_button_buyer.setEnabled(True)
+
+    def calculate_price_seller(self):
+        sum = 0
+        for i in reversed(range(self.cart_layout_seller.count())):
+            sum += int(self.cart_layout_seller.itemAt(i).widget().price.text().split(' ')[1][:-1]) * int(
+                self.cart_layout_seller.itemAt(i).widget().stocknumber_box.value())
+        self.label_totalprice_seller.setText(f"-Total Price: {sum} €")
+        self.label_sum_cart_seller.setText(f"{int(self.budget - sum)} €")
+        if int(self.budget - sum) < 0:
+            self.checkout_button_seller.setEnabled(False)
+        else:
+            self.checkout_button_seller.setEnabled(True)
+        return sum
 
     def login(self):
         user = self.input_username.text()
@@ -239,7 +309,7 @@ class Startscreen(QMainWindow):
     def register(self):
         registerwindow.show()
 
-    def isseller(self):
+    def isbuyer(self):
         return self.stackedWidget.currentIndex() == 1
 
     def setuservalues(self):
@@ -249,6 +319,7 @@ class Startscreen(QMainWindow):
         self.welcome_label_username.setText(f'welcome {self.user}'.upper())
         self.welcome_label_budget.setText(f'your current budget is {int(self.budget)}€'.upper())
         self.label_cart_budget.setText(f'Current Money: {int(self.budget)}€')
+        self.label_cart_budget_seller.setText(f'Current Money: {int(self.budget)}€')
 
 
 class CreateAccountDialog(QDialog):
@@ -310,7 +381,7 @@ class ItemView(QWidget):
         preview.show()
         preview.set_pixmap(event)
 
-    def addtochart(self, layoutitem, layoutdetails, layoutdetails2, layoutextras, screen):
+    def addtocart(self, layoutitem, layoutdetails, layoutdetails2, layoutextras, screen):
         self.cart_button.clicked.connect(lambda: self.addselftochart(layoutitem, layoutdetails, layoutdetails2, layoutextras, screen))
 
     def addselftochart(self, layoutitem, layoutdetails, layoutdetails2, layoutextras,  screen):
@@ -415,6 +486,33 @@ class ExtraItem(QWidget):
             else:
                 layout2.addWidget(Addondetails(self.name.text(), self.stock.text(), self.price.text()))
 
+
+class SellerItem(QWidget):
+    def __init__(self, name='name', price='preis', stock='stock', extra=False):
+        super(SellerItem, self).__init__()
+        loadUi("./ui_files/item_seller.ui", self)
+        self.stock.setText('Stock: ' + str(stock))
+        self.price.setText('Price: ' + str(price) + '€')
+        self.name.setText(str(name))
+        self.extra = extra
+        self.instock = stock
+        if not self.extra:
+            picture = QPixmap(f"./ui_files/product_images/{name}.jpg")
+        else:
+            picture = QPixmap(f"./ui_files/extras_images/{name}.jpg")
+        self.picture.setPixmap(picture)
+
+    def addtocart(self, cartlayout, calculateprice, searchlayout):
+        self.addtocart_button.clicked.connect(lambda: self.addselftocart(cartlayout, calculateprice, searchlayout))
+
+    def addselftocart(self, cartlayout, calculateprice, searchlayout):
+        cartlayout.addWidget(self)
+        self.addtocart_button.setText('Remove')
+        self.addtocart_button.clicked.connect(lambda: self.removefromcart(calculateprice, searchlayout))
+
+    def removefromcart(self, calculateprice, searchlayout):
+        searchlayout.addWidget(self)
+        calculateprice()
 
 class Addondetails(QWidget):
     def __init__(self, name='name', stock=1, price=0):

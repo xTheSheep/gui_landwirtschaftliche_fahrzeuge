@@ -1,11 +1,13 @@
 <RCC>
   <qresource prefix="pictures">
+    <file>assets/icons/icons_png/point_of_sale_FILL0_wght400_GRAD0_opsz48.png</file>
     <file>assets/weat-wallpaper.jpg</file>
     <file>assets/login-side-wallpaper.png</file>
     <file>assets/Logo2.png</file>
     <file>assets/Logo.png</file>
   </qresource>
   <qresource prefix="icons_white">
+    <file>assets/icons/icons_png/icons_white/shopping_bag_white.png</file>
     <file>assets/icons/icons_png/icons_white/add_white.png</file>
     <file>assets/icons/icons_png/icons_white/agriculture_white.png</file>
     <file>assets/icons/icons_png/icons_white/badge_white.png</file>
@@ -21,6 +23,7 @@
     <file>assets/icons/icons_png/icons_white/shopping_cart_checkout_white.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>assets/icons/icons_png/keyboard_double_arrow_down_FILL0_wght400_GRAD0_opsz48.png</file>
     <file>assets/icons/icons_png/remove.png</file>
     <file>assets/icons/icons_png/arrow_drop_down_FILL0_wght400_GRAD0_opsz48.png</file>
     <file>assets/icons/icons_png/shelves_FILL0_wght400_GRAD0_opsz48.png</file>
@@ -51,5 +54,19 @@
     <file>assets/icons/settings_FILL0_wght400_GRAD0_opsz48.svg</file>
     <file>assets/icons/shopping_cart_checkout_FILL0_wght400_GRAD0_opsz48.svg</file>
     <file>assets/icons/person_add_FILL0_wght400_GRAD0_opsz48 (1).png</file>
+  </qresource>
+  <qresource prefix="fonts">
+    <file>fonts/Poppins-Black.ttf</file>
+    <file>fonts/Poppins-Bold.ttf</file>
+    <file>fonts/Poppins-Medium.ttf</file>
+    <file>fonts/Poppins-Regular.ttf</file>
+    <file>fonts/Poppins-SemiBold.ttf</file>
+    <file>fonts/Poppins-Thin.ttf</file>
+    <file>fonts/SourceSansPro-Black.ttf</file>
+    <file>fonts/SourceSansPro-Bold.ttf</file>
+    <file>fonts/SourceSansPro-ExtraLight.ttf</file>
+    <file>fonts/SourceSansPro-Light.ttf</file>
+    <file>fonts/SourceSansPro-Regular.ttf</file>
+    <file>fonts/SourceSansPro-SemiBold.ttf</file>
   </qresource>
 </RCC>
