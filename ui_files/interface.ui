@@ -42,7 +42,7 @@
        <cursorShape>ArrowCursor</cursorShape>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="login_page">
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -633,7 +633,7 @@ QPushButton:hover{
            <item>
             <widget class="QStackedWidget" name="stackedWidget_mainapp">
              <property name="currentIndex">
-              <number>3</number>
+              <number>2</number>
              </property>
              <widget class="QWidget" name="page_home">
               <property name="styleSheet">
@@ -1115,7 +1115,7 @@ QComboBox::down-arrow {
                      <cursorShape>PointingHandCursor</cursorShape>
                     </property>
                     <property name="focusPolicy">
-                     <enum>Qt::NoFocus</enum>
+                     <enum>Qt::StrongFocus</enum>
                     </property>
                     <property name="text">
                      <string>Search</string>
@@ -1158,7 +1158,7 @@ QComboBox::down-arrow {
                      <cursorShape>PointingHandCursor</cursorShape>
                     </property>
                     <property name="focusPolicy">
-                     <enum>Qt::NoFocus</enum>
+                     <enum>Qt::StrongFocus</enum>
                     </property>
                     <property name="text">
                      <string>Clear</string>
@@ -1238,8 +1238,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>57</width>
-                       <height>18</height>
+                       <width>1078</width>
+                       <height>500</height>
                       </rect>
                      </property>
                      <property name="styleSheet">
@@ -1497,9 +1497,12 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>75</width>
-                    <height>18</height>
+                    <width>1096</width>
+                    <height>493</height>
                    </rect>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::TabFocus</enum>
                   </property>
                   <layout class="QGridLayout" name="configuration_layout"/>
                  </widget>
@@ -2365,7 +2368,7 @@ QPushButton:hover{
            <item>
             <widget class="QStackedWidget" name="stackedWidget_mainapp_seller">
              <property name="currentIndex">
-              <number>2</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="page_home_seller">
               <property name="styleSheet">
@@ -2786,7 +2789,7 @@ QComboBox::down-arrow {
                      <enum>QTabWidget::Rounded</enum>
                     </property>
                     <property name="currentIndex">
-                     <number>1</number>
+                     <number>0</number>
                     </property>
                     <property name="elideMode">
                      <enum>Qt::ElideNone</enum>
@@ -2879,8 +2882,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>100</width>
-                           <height>30</height>
+                           <width>1072</width>
+                           <height>498</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="layout_search_seller">
@@ -2989,8 +2992,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>100</width>
-                           <height>30</height>
+                           <width>1072</width>
+                           <height>498</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="layout_search_seller_extra">
@@ -3422,18 +3425,38 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
   <tabstop>home_button</tabstop>
   <tabstop>search_button</tabstop>
   <tabstop>cart_button</tabstop>
-  <tabstop>pushButton_2</tabstop>
   <tabstop>logout_button</tabstop>
+  <tabstop>pushButton_2</tabstop>
   <tabstop>search_field_ps_buyer</tabstop>
   <tabstop>search_field_kmh_buyer</tabstop>
+  <tabstop>search_field_min_price_buyer</tabstop>
+  <tabstop>search_field_max_price_buyer</tabstop>
   <tabstop>search_field_year_buyer</tabstop>
+  <tabstop>sort_field_buyer</tabstop>
+  <tabstop>searchitem_button</tabstop>
+  <tabstop>clear_button_buyer</tabstop>
   <tabstop>scrollArea_buyer</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>scrollArea_3</tabstop>
+  <tabstop>addtocart_button</tabstop>
+  <tabstop>scrollArea_2</tabstop>
+  <tabstop>clear_cart_button_buyer</tabstop>
+  <tabstop>checkout_button_buyer</tabstop>
+  <tabstop>pushButton_5</tabstop>
   <tabstop>home_button_seller</tabstop>
   <tabstop>search_button_seller</tabstop>
   <tabstop>cart_button_seller</tabstop>
   <tabstop>pushButton_9</tabstop>
   <tabstop>logout_button_seller</tabstop>
   <tabstop>search_seller</tabstop>
+  <tabstop>sortbox_seller</tabstop>
+  <tabstop>searchitem_button_seller</tabstop>
+  <tabstop>searchitem_button_seller_2</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>scrollArea_seller_2</tabstop>
+  <tabstop>scrollArea_4</tabstop>
+  <tabstop>checkout_button_seller</tabstop>
+  <tabstop>scrollArea_seller</tabstop>
  </tabstops>
  <resources>
   <include location="agriculture-shop-ressources.qrc"/>
@@ -3463,7 +3486,7 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
    <hints>
     <hint type="sourcelabel">
      <x>708</x>
-     <y>554</y>
+     <y>555</y>
     </hint>
     <hint type="destinationlabel">
      <x>58</x>
@@ -3494,8 +3517,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>606</x>
-     <y>436</y>
+     <x>629</x>
+     <y>437</y>
     </hint>
     <hint type="destinationlabel">
      <x>45</x>
@@ -3514,8 +3537,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
      <y>106</y>
     </hint>
     <hint type="destinationlabel">
-     <x>560</x>
-     <y>222</y>
+     <x>630</x>
+     <y>237</y>
     </hint>
    </hints>
   </connection>

@@ -1,15 +1,11 @@
 import sys
 import sqlite3
-from time import sleep
 
 from PyQt5.QtCore import QPoint, Qt
 from ui_files import ressources_interface
 from PyQt5.uic import loadUi
-from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget, QLabel
-from PyQt5.QtGui import QDoubleValidator, QPixmap, QPainter, QCursor, QIcon
-
-
-# workflow: verkäufer, hotkeys (esc etc)
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget, QLabel, QShortcut, QPushButton
+from PyQt5.QtGui import QDoubleValidator, QPixmap, QPainter, QCursor, QIcon, QKeySequence
 
 
 # screens
@@ -24,6 +20,7 @@ class Startscreen(QMainWindow):
         # set initial session values
         self.stackedWidget.setCurrentIndex(0)
         self.pushButton_4.clicked.connect(self.login)
+        self.input_password.returnPressed.connect(self.login)
         self.pushButton.clicked.connect(self.register)
         self.searchitem_button.clicked.connect(self.refreshtable)
         self.searchitem_button_seller.clicked.connect(self.refreshtable)
@@ -48,6 +45,28 @@ class Startscreen(QMainWindow):
         self.search_button_seller.clicked.connect(lambda: self.updatepage_seller(1))
         self.cart_button_seller.clicked.connect(lambda: self.updatepage_seller(2))
         self.logout_button_seller.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
+        # set shortcuts
+        self.shortcut_close = QShortcut(QKeySequence('ESC'), self)
+        self.shortcut_close.activated.connect(self.navigateback)
+
+    def navigateback(self):
+        if self.stackedWidget.currentIndex() == 0:
+            app.quit()
+        if not self.isbuyer() and self.stackedWidget_mainapp_seller.currentIndex() == 0:
+            self.stackedWidget.setCurrentIndex(0)
+        if self.isbuyer() and self.stackedWidget_mainapp.currentIndex() == 0:
+            self.stackedWidget.setCurrentIndex(0)
+        if self.isbuyer() and self.stackedWidget_mainapp.currentIndex() != 0:
+            self.updatepage_buyer(0)
+        if not self.isbuyer() and self.stackedWidget_mainapp_seller.currentIndex() != 0:
+            self.stackedWidget_mainapp_seller.setCurrentIndex(0)
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Return or event.key() == Qt.Key_Enter:
+            focused_widget = QApplication.focusWidget()
+
+            if isinstance(focused_widget, QPushButton):
+                focused_widget.click()
 
     def refreshtable(self):
         self.clearlayout()
