@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>816</height>
+    <width>1385</width>
+    <height>885</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -633,7 +633,7 @@ QPushButton:hover{
            <item>
             <widget class="QStackedWidget" name="stackedWidget_mainapp">
              <property name="currentIndex">
-              <number>2</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="page_home">
               <property name="styleSheet">
@@ -740,8 +740,10 @@ QPushButton:focus {
                  </property>
                  <property name="font">
                   <font>
-                   <family>Poppins Light</family>
+                   <family>Source Sans Pro</family>
                    <pointsize>16</pointsize>
+                   <weight>50</weight>
+                   <bold>false</bold>
                   </font>
                  </property>
                  <property name="text">
@@ -762,7 +764,7 @@ QPushButton:focus {
                  </property>
                  <property name="font">
                   <font>
-                   <family>Poppins Light</family>
+                   <family>Source Sans Pro</family>
                    <pointsize>16</pointsize>
                   </font>
                  </property>
@@ -813,9 +815,9 @@ QPushButton:focus {
                  <property name="font">
                   <font>
                    <family>Source Sans Pro SemiBold</family>
-                   <pointsize>11</pointsize>
-                   <weight>50</weight>
-                   <bold>false</bold>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
                   </font>
                  </property>
                  <property name="cursor">
@@ -1238,8 +1240,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>1078</width>
-                       <height>500</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="styleSheet">
@@ -1497,8 +1499,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1096</width>
-                    <height>493</height>
+                    <width>100</width>
+                    <height>30</height>
                    </rect>
                   </property>
                   <property name="focusPolicy">
@@ -1671,8 +1673,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>744</width>
-                       <height>719</height>
+                       <width>93</width>
+                       <height>44</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="cart_buyer_layout_scroll">
@@ -2882,8 +2884,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>1072</width>
-                           <height>498</height>
+                           <width>100</width>
+                           <height>30</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="layout_search_seller">
@@ -2992,8 +2994,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>1072</width>
-                           <height>498</height>
+                           <width>100</width>
+                           <height>30</height>
                           </rect>
                          </property>
                          <layout class="QVBoxLayout" name="layout_search_seller_extra">
@@ -3130,8 +3132,8 @@ QScrollBar::add-page:vertical, QScrollBar:sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>768</width>
-                       <height>780</height>
+                       <width>93</width>
+                       <height>46</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="cart_buyer_layout_scroll_2">

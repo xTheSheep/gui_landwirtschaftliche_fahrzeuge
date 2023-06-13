@@ -1,11 +1,12 @@
-import sys
+import sys, os
 import sqlite3
 
 from PyQt5.QtCore import QPoint, Qt
 from ui_files import ressources_interface
+from PyQt5 import QtGui
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget, QLabel, QShortcut, QPushButton
-from PyQt5.QtGui import QDoubleValidator, QPixmap, QPainter, QCursor, QIcon, QKeySequence
+from PyQt5.QtGui import QDoubleValidator, QPixmap, QPainter, QCursor, QIcon, QKeySequence, QFontDatabase, QFont
 
 
 # screens
@@ -603,6 +604,12 @@ class ExtraItemCart(QWidget):
 
 # main
 app = QApplication(sys.argv)
+fontDatabase = QtGui.QFontDatabase()
+for(dirpath, dirnames, filenames) in os.walk('./ui_files/fonts/'):
+    for filename in filenames:
+        fontDatabase.addApplicationFont(f'./ui_files/fonts/{filename}')
+
+
 homescreen = Startscreen()
 preview = ZoomablePixmapWidget(QPixmap('./ui_files/product_images/JCB_7270.jpg'))
 homescreen.show()
